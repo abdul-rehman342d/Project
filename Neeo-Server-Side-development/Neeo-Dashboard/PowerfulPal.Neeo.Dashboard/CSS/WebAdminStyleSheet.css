@@ -1,0 +1,476 @@
+﻿body {
+    background-color: whitesmoke;
+            /*background-image: url('/Images/dashboard-bg.jpg');background-repeat: no-repeat;  background-size: 100% auto;*/
+     
+}
+
+
+/*#region main-Header*/
+#header {
+width: 100%;
+background-image: url("/Images/dashboard-top-repeter.jpg");
+background-repeat: repeat-x;
+height: 115px;
+min-height: 115px;
+    position: relative;
+}
+
+
+#mainHeader-logo-colmn {
+  height: 115px;
+min-height: 115px;
+width: 50%;
+background-color: transparent;
+float: left;
+    position: absolute;
+}
+#dashboard-logo {
+    width: 171px;
+    height: 75px;
+    background-image: url("/Images/dashboard-logo.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    margin-left: 52%;
+    margin-top: 2%;
+
+}
+
+#mainHeader-user-column {
+  height: 115px;
+min-height: 115px;
+width: 50%;
+background-color: transparent;
+margin-left: 50%;
+    position: absolute;
+}
+#User-side-div {
+    background-color: transparent;
+height: 24px;
+width: 168px;
+margin-left: 34%;
+padding-top: 6%;
+}
+#user-sign {
+float: left;
+background-image: url("/Images/user-icon.png");
+background-repeat: no-repeat;
+width: 35px;
+height: 20px;
+background-color: transparent;
+margin-top: 4px;
+}
+
+#user-dropdown-div {
+cursor: pointer;
+width: 168px;
+height: 24px;
+background-color: transparent;
+}
+#user-dropdown {
+      border: 0 !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+  
+       background: url('/Images/down-bulit.png') no-repeat;
+       background-position: 72px 5px;
+       margin-left: -10%;
+       width: 115px;
+       color: rgb(106, 186, 25);
+       cursor: pointer;
+}
+select::-ms-expand {
+    display: none;
+}
+/*#endregion main-Header*/
+
+
+
+#jqxWidget {
+    width: 650px;
+height: 341px;
+padding-left: 348px;
+padding-top: 60px;
+}
+
+#UserEditPannal,#addNewUserPannal,#AccountSummaryPannal,#deteteConfermationWindowPannal  {
+    display: none;
+    /*height: 400px;
+    width: 560px;*/
+
+        height: 1px;
+    width: 1px;
+    /*background-color: whitesmoke;*/
+    position: absolute;
+    /*top: 100px;
+    left: 400px;*/
+
+    top: 450px;
+    left: 530px;
+   
+    z-index: 800;
+    box-shadow:  0 0 20px 0 #888888;
+background-image: url("/Images/dashboard-top-repeter.jpg");
+background-repeat: repeat-x;
+   background-size: cover;
+}
+
+
+
+
+
+
+/*#CrossButtonSummaryPannel {
+   
+   width: 17px;
+   height: 17px;
+   background-image: url("/Images/close_button.png");
+   background-repeat: no-repeat;
+   float: right;
+   margin-top: 9px;
+   margin-right: 7px;
+  
+}*/
+
+
+
+/*#region EditPannal*/
+/*#CrossButtonPannel {
+    display: none;
+   width: 17px;
+   height: 17px;
+   background-image: url("/Images/close_button.png");
+   background-repeat: no-repeat;
+   float: right;
+   margin-top: 4px;
+   margin-right: 4px;
+  
+}*/
+
+.editPannal {
+    display: none;
+}  
+
+.editPannalButons {
+    background-color: #6ABA19;
+    /*border: none;*/
+    /*border-radius: 5px;*/
+    border-color: white;
+    color: white;
+    font-weight: bold;
+    height: 35px;
+    width: 87px;
+    font-size: 16px;
+ 
+ /*-moz-box-shadow: 0px 10px 14px -7px #3e7327;
+ -webkit-box-shadow: 0px 10px 14px -7px #3e7327;
+ box-shadow: 0px 10px 14px -7px #3e7327;*/
+ background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6ABA19), color-stop(1, #6ABA35));
+ background:-moz-linear-gradient(top, #6ABA19 5%, #6ABA35 100%);
+ background:-webkit-linear-gradient(top, #6ABA19 5%, #6ABA35 100%);
+ background:-o-linear-gradient(top, #6ABA19 5%, #6ABA35 100%);
+ background:-ms-linear-gradient(top, #6ABA19 5%, #6ABA35 100%);
+ background:linear-gradient(to bottom, #6ABA19 5%, #6ABA35 100%);
+ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6ABA19', endColorstr='#6ABA35',GradientType=0);
+ /*background-color:#77b55a;*/
+ -moz-border-radius:4px;
+ -webkit-border-radius:4px;
+ border-radius:4px;
+ border:1px solid #4b8f29;
+ display:inline-block;
+ cursor:pointer;
+ color:#ffffff;
+ font-family:arial;
+ /*font-size:13px;*/
+ font-weight:bold;
+ padding:6px 12px;
+ text-decoration:none;
+ text-shadow:0px 1px 0px #5b8a3c;
+}
+
+.editPannalButons:hover {
+ background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6ABA35), color-stop(1, #6ABA19));
+ background:-moz-linear-gradient(top, #6ABA35 5%, #6ABA19 100%);
+ background:-webkit-linear-gradient(top, #6ABA35 5%, #6ABA19 100%);
+ background:-o-linear-gradient(top, #6ABA35 5%, #6ABA19 100%);
+ background:-ms-linear-gradient(top, #6ABA35 5%, #6ABA19 100%);
+ background:linear-gradient(to bottom, #6ABA35 5%, #6ABA19 100%);
+ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6ABA35', endColorstr='#6ABA19',GradientType=0);
+ background-color:#6ABA35;
+}
+
+#ChangepasswordTextbox,#RetypepasswordTextbox {
+    height: 20px;
+    width: 185px;
+    border-color: lightgray;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    transition: all 0.5s linear 0s;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+#edittable{
+   
+		width:75%; 
+        margin-left: 74px;
+		border-collapse:collapse; 
+	}
+	#edittable td{ 
+		/*padding:7px; border:#4e95f4 1px solid;*/
+	  
+	    font-weight: lighter;
+	}
+	/* provide some minimal visual accomodation for IE8 and below */
+	  #edittable tr{
+	       font-face: "verdana";
+           height: 5%;
+        
+		 
+	}
+       
+
+
+       #edittable th {
+           text-align: left;
+           
+       }
+       /*#edittable td:first-child {
+           padding-left: 6px;
+         
+       }*/
+   
+       #edittable td:last-child {
+           /*padding-right: 33px;*/
+       }
+
+       #edittable td:nth-of-type(2) {
+           text-align: left;
+      
+           width: 40%;
+       }
+        #edittable tr:nth-of-type(4) {
+            margin-top: 5px;
+       }
+
+	/*  Define the background color for all the ODD background rows  */
+	#edittable tr:nth-child(odd){
+	  
+		/*background-image: url('/Images/dashboard-top-repeter.jpg') ;*/
+
+	    height: 30px;
+	}
+	/*  Define the background color for all the EVEN background rows  */
+	#edittable tr:nth-child(even){
+        
+
+        height: 30px;
+	}
+/*#endregion EditPannal*/
+
+/*#region AddPannal*/
+
+.addPannal {
+    display: none;
+}
+#add-UserNameTextbox,#add-PasswordTextbox,#add-retypePasswordTextbox {
+    height: 20px;
+    width: 185px;
+    border-color: lightgray;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    transition: all 0.5s linear 0s;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+/*#endregion AddPannal*/
+
+/*#region SummaryPannal*/
+.summeryPannal {
+     display: none;
+}
+
+
+#SummaryHead {
+   background-color: lightgray;
+width: 423px;
+height: 34px;
+    text-align: center;
+line-height: 34px;
+margin-left: 2px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+}
+
+em {
+	font-style: italic; 
+}
+
+
+#LoginHistoryPannal {
+    overflow: scroll;
+    height: 200px;
+    width: 425px;
+    clear: both;
+}
+
+#LoginHistoryTable {
+	background: #f5f5f5;
+	border-collapse: separate;
+	box-shadow: inset 0 1px 0 #fff;
+	font-size: 12px;
+	line-height: 24px;
+	/*margin: 30px auto;*/
+	text-align: left;
+	width: 400px;
+}	
+
+#LoginHistoryTable th {
+	/*background: url(http://jackrugile.com/images/misc/noise-diagonal.png), linear-gradient(#777, #444);*/
+    background-color: cadetblue;
+	border-left: 1px solid #555;
+	border-right: 1px solid #777;
+	border-top: 1px solid #555;
+	border-bottom: 1px solid #333;
+	box-shadow: inset 0 1px 0 #999;
+	color: #fff;
+  font-weight: bold;
+	padding: 10px 15px;
+	position: relative;
+	text-shadow: 0 1px 0 #000;	
+}
+
+#LoginHistoryTable th:after {
+	background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
+	content: '';
+	display: block;
+	height: 25%;
+	left: 0;
+	margin: 1px 0 0 0;
+	position: absolute;
+	top: 25%;
+	width: 100%;
+}
+
+#LoginHistoryTable th:first-child {
+	border-left: 1px solid #777;	
+	box-shadow: inset 1px 1px 0 #999;
+}
+
+#LoginHistoryTable th:last-child {
+	box-shadow: inset -1px 1px 0 #999;
+}
+
+#LoginHistoryTable td {
+	border-right: 1px solid #fff;
+	border-left: 1px solid #e8e8e8;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #e8e8e8;
+	padding: 10px 15px;
+	position: relative;
+	transition: all 300ms;
+}
+
+#LoginHistoryTable td:first-child {
+	box-shadow: inset 1px 0 0 #fff;
+}	
+
+#LoginHistoryTable td:last-child {
+	border-right: 1px solid #e8e8e8;
+	box-shadow: inset -1px 0 0 #fff;
+}	
+
+#LoginHistoryTable tr {
+	background: url(http://jackrugile.com/images/misc/noise-diagonal.png);	
+}
+
+#LoginHistoryTable tr:nth-child(odd) td {
+	background: #f1f1f1 url(http://jackrugile.com/images/misc/noise-diagonal.png);	
+}
+
+#LoginHistoryTable tr:last-of-type td {
+	box-shadow: inset 0 -1px 0 #fff; 
+}
+
+#LoginHistoryTable tr:last-of-type td:first-child {
+	box-shadow: inset 1px -1px 0 #fff;
+}	
+
+#LoginHistoryTable tr:last-of-type td:last-child {
+	box-shadow: inset -1px -1px 0 #fff;
+}	
+
+#LoginHistoryTable tbody:hover td {
+	color: transparent;
+	text-shadow: 0 0 3px #aaa;
+}
+
+#LoginHistoryTable tbody:hover tr:hover td {
+	color: #444;
+	text-shadow: 0 1px 0 #fff;
+}
+/*#endregion SummaryPannal*/
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #6aba19 !important;
+    box-shadow: 0 0 10px #6aba19;
+}
+
+.deleteConfirmation {
+    display: none;
+}
+#CrossButtonDelete,#CrossButtonSummaryPannel,#CrossButtonPannel,#CrossButtonAddPannel {
+    display: none;
+   width: 17px;
+   height: 17px;
+   background-image: url("/Images/close_button.png");
+   background-repeat: no-repeat;
+   float: right;
+   margin-top: 4px;
+   margin-right: 4px;
+
+  
+}
+#MessageBox {
+         
+         font-family: Arial,Helvetica,sans-serif;
+         color: #666;
+         font-size: 18px;
+         text-shadow: 1px 1px 0 #fff;
+         text-align: center;
+         line-height: 58px;
+    
+    
+     display: none;
+  width: 100%;
+  height: 58px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: 0 0 30px 0 #6ABA22;
+
+/* IE10 Consumer Preview */ 
+background-image: -ms-radial-gradient(center bottom, ellipse farthest-corner, #AFF78A 0%, #6ABA22 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-radial-gradient(center bottom, ellipse farthest-corner, #AFF78A 0%, #6ABA22 100%);
+
+/* Opera */ 
+background-image: -o-radial-gradient(center bottom, ellipse farthest-corner, #AFF78A 0%, #6ABA22 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(radial, center bottom, 0, center bottom, 560, color-stop(0, #AFF78A), color-stop(1, #6ABA22));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-radial-gradient(center bottom, ellipse farthest-corner, #AFF78A 0%, #6ABA22 100%);
+
+/* W3C Markup, IE10 Release Preview */ 
+background-image: radial-gradient(ellipse farthest-corner at center bottom, #AFF78A 0%, #6ABA22 100%);
+
+
+
+
+
+
+}
+

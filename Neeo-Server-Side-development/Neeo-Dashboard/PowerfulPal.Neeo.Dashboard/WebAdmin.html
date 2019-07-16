@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Web Admin</title>
+    <!--<link href="CSS/DefaultDashboardStyle.css" rel="stylesheet" />-->
+
+    <link href="CSS/WebAdminStyleSheet.css" rel="stylesheet" />
+    <link href="CSS/jqx.base.css" rel="stylesheet" />
+    <script src="Script/CommonScript-v1.js"></script>
+
+    <script src="jqxTableScripts/jquery-1.11.1.min.js"></script>
+    <script src="Script/jquery-1.11.2.min.js"></script>
+    <script src="jqwidgets/jqxcore.js"></script>
+
+    <script src="jqwidgets/jqxdata.js"></script>
+    <script src="jqwidgets/jqxbuttons.js"></script>
+
+
+    <script src="jqwidgets/jqxscrollbar.js"></script>
+
+
+    <script src="jqwidgets/jqxmenu.js"></script>
+
+    <script src="jqwidgets/jqxgrid.js"></script>
+
+    <script src="jqwidgets/jqxgrid.edit.js"></script>
+
+    <script src="jqwidgets/jqxgrid.sort.js"></script>
+
+    <script src="jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxcalendar.js"></script>
+
+    <script src="jqwidgets/jqxlistbox.js"></script>
+
+    <script src="jqwidgets/jqxdropdownlist.js"></script>
+
+    <script type="text/javascript" src="jqwidgets/jqxwindow.js"></script>
+    <script src="jqwidgets/jqxcheckbox.js"></script>
+
+    <script src="jqwidgets/jqxnumberinput.js"></script>
+
+    <script src="jqwidgets/jqxdatetimeinput.js"></script>
+    <script src="jqwidgets/jqxgrid.pager.js"></script>
+
+    <script src="jqwidgets/globalization/globalize.js"></script>
+    <script src="Script/demos.js"></script>
+    <!--<script src="scripts/demos.js"></script>-->
+    <script src="jqwidgets/jqxinput.js"></script>
+    <!--<script src="generatedata.js"></script>-->
+
+    <script src="script/jquery.md5.js"></script>
+
+    <script src="Script/WebAdminScript.js"></script>
+    <style type="text/css">
+        .editedRow {
+            color: #b90f0f !important;
+            font-style: italic;
+        }
+    </style>
+
+
+
+
+
+
+</head>
+<body>
+    <div id="header" style="height: 100px;min-height: 101px;">
+
+        <div id="mainHeader-logo-colmn"><div id="dashboard-logo"></div></div>
+        <div id="mainHeader-user-column">
+            <div id="User-side-div">
+
+                <div id="user-sign"></div>
+                <div id="user-dropdown-div">
+                    <select id="user-dropdown">
+                        <option selected="selected" value="username">WebAdmin</option>
+                        <option value="Sign_Out">Sign Out</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="lowerbody" style="">
+
+        <div id='jqxWidget'>
+            <div id="jqxgrid"></div>
+            <div style="margin-top: 30px;">
+                <div id="cellbegineditevent"></div>
+                <div style="margin-top: 10px;" id="cellendeditevent"></div>
+            </div>
+
+            <div id="popupWindow" style="display: none">
+                <div>Edit</div>
+                <div style="overflow: hidden;">
+                    <table>
+                        <tr>
+                            <td align="right">uID:</td>
+                            <td align="left"><input id="uID" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right">userName:</td>
+                            <td align="left"><input id="userName" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right">isActive:</td>
+                            <td align="left"><input id="isActive" /></td>
+                        </tr>
+
+                        <tr>
+                            <td align="right"></td>
+                            <td style="padding-top: 10px;" align="right"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="UserEditPannal" class="editPannal">
+                <div id="CrossButtonPannel" class="editPannal"></div>
+                <div id=""></div>
+                <table id="edittable" edittable class="editPannal">
+                    <thead>
+                        <tr>
+
+                            <td>
+                                <h3>Change Password</h3>
+                            </td>
+                            <td>
+                                <h3>Account Status</h3>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>
+                            <p id="EditPannalUsername" style="text-decoration: underline;">Username: Usman</p>
+                        </td>
+
+                        <td>
+                            <div style="float: left;width: 50px;">Status:</div><div id="editpannalUserstatus" style="margin-left: 50px;color: #6aba25;">Active</div>
+                            <!--<p>Status: Active</p>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="ChangepasswordTextbox" placeholder="Password" type="password" />
+                        </td>
+                        <td>
+                            <button id="StatusButton" class="editPannalButons">LockOut</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="RetypepasswordTextbox" placeholder="ReType Password" type="password" />
+                        </td>
+                    </tr>
+                    <tr style="height: 5px;"><td></td></tr>
+                    <tr>
+                        <td>
+                            <button id="EditPannalSaveButton" class="editPannalButons">Save</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td><button id="OkButton" class="editPannalButons">OK</button></td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div id="addNewUserPannal" class="addPannal">
+                <div id="CrossButtonAddPannel" class="addPannal"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>
+                                <h3>Add New User</h3>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input id="add-UserNameTextbox" placeholder="Username" type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="add-PasswordTextbox" placeholder="Password" type="password" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="add-retypePasswordTextbox" placeholder="Retype Password" type="password" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="Add-saveButton" class="editPannalButons">Save</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="AccountSummaryPannal" class="summeryPannal">
+                <div id="CrossButtonSummaryPannel" class="summeryPannal"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>
+                                <h3 style="margin-top: 0;">Account Summary</h3>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p id="SummeryPannal-userName" style="margin: 0;">Username:</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p id="SummeryPannal-Status" style="margin: 0;">Status:</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>Login History</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                                <div id="SummaryHead"> <div style="float: left; text-align: left; margin-left: 13px; width: 96px; background-color: transparent;">Sr.</div><div style="float: left; width: 112px; margin-left: 4px; text-align: left; background-color: transparent;">Login Time</div></div>
+                                <div id="LoginHistoryPannal">
+
+                                    <table id="LoginHistoryTable"></table>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="CancelButtonSummaryPannal" class="editPannalButons">Cancel</button>
+                                <button id="CrearSummaryButton" class="editPannalButons">Clear</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="deteteConfermationWindowPannal" class="deleteConfirmation">
+                <div id="CrossButtonDelete" style="margin-left: 1px;padding-left: 1px;" class="deleteConfirmation"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>
+                                <h3>User Deletion</h3>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p id="UserToDelete">Are Sure to Delete Mr: </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><button id="CancelButtonDeletePannal" class="editPannalButons">Cancel</button> <button id="DeleteButton" class="editPannalButons">Delete</button></td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="MessageBox">text missing</div>
+</body>
+</html>

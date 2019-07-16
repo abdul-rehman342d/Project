@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FileSharingService.NeeoFileSharingService" Factory="System.ServiceModel.Activation.ServiceHostFactory" CodeBehind="NeeoFileSharingService.svc.cs" %>

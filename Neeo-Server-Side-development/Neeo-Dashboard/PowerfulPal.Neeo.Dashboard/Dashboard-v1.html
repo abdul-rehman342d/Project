@@ -1,0 +1,279 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Neeo Dashboard</title>
+    <script src="Script/CommonScript-v1.js?version=1.0"></script>
+    <script src="Script/Chart.js"></script>
+    <script src="Script/jquery-1.11.2.min.js"></script>
+    
+    <script src="Script/dashboardScript-v1.js?version=1.0"></script>
+    <script src="Script/jquery.tablesorter.min.js"></script>
+    <link href="CSS/DefaultDashboardStyleSheet.css" rel="stylesheet" />
+    <!--<link href="CSS/manueStyle.css" rel="stylesheet" />-->
+</head>
+<body>
+    <div id="rapper">
+          <div id="header-rapper" >
+            <div id="header-box" style="width: 1100px; margin: 0 auto;">
+                <div id="header">
+
+                    <div id="mainHeader-logo-colmn"><div id="dashboard-logo"></div></div>
+
+                    <div id="mainHeader-user-column">
+                        <div id="User-side-div">
+
+                            <div id="user-sign"></div>
+                            <div id="user-dropdown-div">
+
+                                <div style="color: #6aba25;"><span id="User-name-span">User</span>(<u><a id="sign-out-button">Logout</a></u>)</div>
+                                <div style="float:right;">
+                                    <div id="last-login-time" style="width: 300px; height: 13px; color: gray; text-align: right; font-size: 10px; margin-top: 4px; float: right;">Last Login:</div>
+                                    <div id="last-sync-time" style="width: 300px; height: 15px; color: gray; margin-top: 3px; text-align: right; font-size: 10px; float: right;">Last Sync:</div>
+                                    <div id="last-sync-time-statement" style="  width: 376px;height: 15px;color: gray;  text-align: right;font-size: 10px;float: right;">This Dashboard shows Registered Neeo Users till <span id="last-sync-statement-time"> </span>(GMT)</div>
+                                 </div>
+                               
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+           
+        </div>
+		
+        <div id="inner_header">
+            <div id="inner-header-left-side" style="position:relative; height: inherit; width: 840px; float: left; background-image: url('/Images/bar.png'); background-repeat: no-repeat;">
+                <div id="inner-header-all-count-value-div">All<span id="inner-header-all-count-value" class="inner-header-count-value">0</span></div>
+                <div id="inner-header-ios-count-value-div">iOS<span id="inner-header-ios-count-value" class="inner-header-count-value">0</span></div>
+                <div id="inner-header-android-count-value-div">Android<span id="inner-header-android-count-value" class="inner-header-count-value">0</span></div>
+            </div>
+            <div id="inner-header-right-side" >View History</div>
+           
+        </div>
+		
+        <div id="inner_rapper">
+           
+
+            
+            <div id="inner-lower-portion">
+                <div id="left_portion">
+                    <div id="left_sub_all_part">
+                        <div id="left-sub-all-part-header" class="left-sub-part-header"><div id="all-heading" class="left-headings">All</div></div>
+                        <div id="left_sub_all_part-mainRows" class="left_sub_part-mainRows">
+                            <div id="r-all-1" class="leftsideinnerRowsT">Registered Users</div>
+                            <div id="r-all-2" class="leftsideinnerRowsm">Last 24 Hours Active Users</div>
+                            <div id="r-all-3" class="leftsideinnerRowsB">Countries</div>
+                        </div>
+                        <div id="left-all-valueBox" class="left-part-value-box">
+                            <div id="all-box-value1" class="box-sub">0</div>
+                            <div id="all-box-value2" class="mid-box-sub">0</div>
+                            <div id="all-box-value3" class="mid-box-sub">0</div>
+                        </div>
+
+                    </div>
+                    <div id="left_sub_ios_part">
+                        <div id="left-sub-ios-part-header" class="left-sub-part-header"><div id="ios-heading" class="left-headings">iOS</div></div>
+                        <div id="left_sub_ios_part-mainRows" class="left_sub_part-mainRows">
+                            <div id="r-ios-1" class="leftsideinnerRowsT"> Registered Users</div>
+                            <div id="r-ios-2" class="leftsideinnerRowsm">Last 24 Hours Active Users</div>
+                            <div id="r-ios-3" class="leftsideinnerRowsB">Countries</div>
+                        </div>
+                        <div id="left-ios-valueBox" class="left-part-value-box">
+                            <div id="ios-box-value1" class="box-sub">0</div>
+                            <div id="ios-box-value2" class="mid-box-sub">0</div>
+                            <div id="ios-box-value3" class="mid-box-sub">0</div>
+                        </div>
+                    </div>
+                    <div id="left_sub_android_part">
+                        <div id="left-sub-android-part-header" class="left-sub-part-header"><div id="android-heading" class="left-headings">Android</div></div>
+                        <div id="left_sub_android_part-mainRows" class="left_sub_part-mainRows">
+                            <div id="r-an-1" class="leftsideinnerRowsT">Registered Users</div>
+                            <div id="r-an-2" class="leftsideinnerRowsm"><label>Last 24 Hours Active Users</label></div>
+                            <div id="r-an-3" class="leftsideinnerRowsB">Countries</div>
+                        </div>
+                        <div id="left-android-valueBox" class="left-part-value-box">
+                            <div id="an-box-value1" class="box-sub">0</div>
+                            <div id="an-box-value2" class="mid-box-sub">0</div>
+                            <div id="an-box-value3" class="mid-box-sub">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="right_portion">
+                    <div id="graph-portion">
+                        <div id="right-upper">
+                            <!--<div id="right_portion-Upper-Header">-->
+                                <div id="dashboardUpperManu">
+                                    <div id="dashboardUpperManuLeftPart" class="dashboardUpperManuTabs" style="transform: none; border-right: none; position: absolute; top: 0; left: 0; width: 17px; height: 30px; float: left; border-top-left-radius: 10px;"></div>
+
+
+                                  
+
+                                    <div id="dashboardUpperManuRegistrationTab" style="width:195px;" class="dashboardUpperManuTabs" >
+                                        <p id="dashboardUpperManuRegisterTabsInnerDiv" class="dashboardUpperManuTabsInnerDiv">All Registered Users</p>
+                                    </div>
+                                    <!--<div id="dashboardUpperManuRegistrationTab2" class="dashboardUpperManuTabs" style="width:5px">
+                                        <p id="dashboardUpperManuRegisterTabsInnerDiv2" class="dashboardUpperManuTabsInnerDiv"></p>
+                                    </div>-->
+                                    <div id="dashboardUpperManuDailyTab" class="dashboardUpperManuTabs">
+                                        <p id="dashboardUpperManuDailyTabsInnerDiv" class="dashboardUpperManuTabsInnerDiv">Yesterday</p>
+                                    </div>
+
+                                    <div id="dashboardUpperManuWeeklyTab" class="dashboardUpperManuTabs">
+                                        <p id="dashboardUpperManuWeeklyTabsInnerDiv" class="dashboardUpperManuTabsInnerDiv">Last 7 Days</p>
+                                    </div>
+
+                                    <div id="dashboardUpperManuMonthlyTab" class="dashboardUpperManuTabs">
+                                        <div id="dashboardUpperManuMonthlyTabsInnerDiv" class="dashboardUpperManuTabsInnerDiv">Last 30 Days</div>
+                                    </div>
+
+                                    <div id="dashboardUpperManuQuarterlyTab" class="dashboardUpperManuTabs" style="border-right:none;">
+                                        <p id="dashboardUpperManuQuarterlyTabsInnerDiv" class="dashboardUpperManuTabsInnerDiv">Last 90 Days </p>
+                                    </div>
+
+                                    <div id="dashboardUpperManuLastPart" class="dashboardUpperManuTabs" style="transform: none; border-right: none; position: absolute; top: 0; left: 638px; width: 23px; height: 30px; float: left; border-top-right-radius: 10px; "></div>
+                                </div>
+                           
+                            <!--</div>-->
+                            <div id="right-upper-date" style="position: absolute; top: 47px; left: 408px; width: 176px; text-align: center; font-size:12px; "></div>
+                            <div id="top-countries-list">
+                                <table id="top-countries" class="ctable" cellspacing='0'>
+                                    <thead>
+                                        <tr>
+
+                                            <th colspan="4">Top Registrations</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+
+                                </table>
+                            </div>
+
+                            <div id="DoughnutChartRapper">
+                                <div id="total-count-in-graph">
+                                    <div id="total-count-value">
+                                        <label id="graph-total-count">0</label>
+                                    </div>
+                                  
+                                </div>
+                                <canvas id="chart-area" width="190" height="190" />
+                            </div>
+                        </div>
+
+                        <div id="lower-grid">
+                            <div id="Grid_header">
+                                <div id="Grid_header-SN">Sr.</div>
+                                <div id="Grid_header-countries">Country</div>
+                                <div id="Grid_header-Downloads">Registrations</div>
+                                <div id="Grid_header-percentage">%age</div>
+                            </div>
+                            <div id="gridPortion">
+                                <table id="grid_view" class="TFtable"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="History-portion">
+                <div id="history-portion-main-heading" style="height: 32px; font-size: 20px; text-align: left; margin-bottom: 20px; border-bottom-style: groove; border-bottom-width: 1px;">Last 5 Days History</div>
+                <div id="manu-left-side">
+                    <!--<span id="reg-text">Registered Users</span> <div id="dropdown-rapper"><span id="drop-down-text">Android</span> <div id="dropdown-sign"></div></div>-->
+                    <span id="reg-text">Platform</span>
+                    <div id="dropdown-rapper">
+                        <select id="plateFormlist" onchange="OnDropdownOptionSelected()">
+                            <option value="all">All</option>
+                            <option value="ios">iOS</option>
+                            <option value="android">Android</option>
+                        </select>
+                        <!--<div id="dropdown-sign"></div></div>-->
+                    </div>
+                </div>
+                <div id="history-manu">
+                    <!--<div id="history-manu-cross-button" class="xx">Dashboard</div>-->
+                    <div id="History-manue-inner">
+                   <span id="initial-date">27 Sep</span> - <span id="final-date">29 Sep</span> 
+                     
+                    </div>
+                </div>
+
+                <div id="history-upper">
+                    <div id="Plateform-color-box" style=" height: 17px; line-height: 20px; padding-top: 2px; display: block; background-color: #fcfcfc">
+                        <div class="plateFormColorBox" style="margin-left: 279px; width: 44px; height: 20px; float: left; ">
+                          <div id="all-box" style="background-color: #4d5360; width: 10px; height: 10px; float: left; margin-right: 10px; margin-top: 5px; "></div>
+                            <div style="float: left;">All</div>
+                        </div>
+                        <div class="plateFormColorBox" style="width: 44px; height: 20px; margin-left: 100px; float: left;">
+                           <div id="ios-box" style="background-color: #4386f4; width: 10px; height: 10px; margin-top: 5px; float: left; margin-right: 10px; "></div>
+                            <div style="float: left;">iOS</div>
+                        </div>
+                        <div class="plateFormColorBox" style="width: 73px; height: 20px; float: left; margin-left: 100px;">
+                           <div id="android-box" style="background-color: #34a853; width: 10px; height: 10px; float: left; margin-right: 10px; margin-top: 5px; "></div>
+                            <div style="float: left;">Android</div>
+                        </div>
+
+                    </div>
+                    
+                     
+
+                    <div id="history-chart">
+                        <div style="width:30%">
+                            <div>
+                                <canvas id="line-chart-canvas" height="320" width="1040"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div id="history-lower">
+                   
+                    <div id="history-grid-wrapper" style="position: relative;">
+                        <div id="history-grid" style="height: 284px; overflow: auto; margin-top: 40px;">
+                            <table id="History_grid_view" class="ptable">
+                                <!--Note: header is genrated at runtime in script at all,ios,android selection in manage grid function if any is reqired must be updated in script-->
+                                <thead style="position: absolute; top: -30px; z-index: 2; height: 30px; ">
+                                    <tr >
+                                        <th style="border-top-left-radius: 10px; width: 91px;"><span>Sr</span></th>
+                                        <th style="text-align: left; width: 375px;"><span>Country</span></th>
+                                        <th><span id="history-h-fivedays-back">counts</span></th>
+                                        <th><span id="history-h-fourdays-back">counts</span></th>
+                                        <th><span id="history-h-threedays-back">counts</span></th>
+                                        <th><span id="history-h-twodays-back">counts</span></th>
+                                        <th style="border-top-right-radius: 10px;"><span id="history-h-Yesterdaydays">counts</span></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody></tbody>
+
+
+                            </table>
+
+                        </div>
+                    </div>
+                  </div>
+
+
+            </div>
+
+        </div>
+        <p style=" background-color: transparent; text-align: center; font-size: 11px; line-height: 25px; height: 15px; color: gray;">© 2015 NeeoPal. All Rights Reserved.</p>
+
+
+    <div id="loaderRapper">
+       
+        <div id="loader"></div>
+    </div>
+
+
+    <div id="MessageBox">text missing</div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IMService.SMS">
+    <Position X="7" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>SMS\SMS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IMService.User" HideInheritanceLine="true">
+    <Position X="0.75" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAABAEAAAAAAAAAggACgCAAAAAEAAADwAAAA=</HashCode>
+      <FileName>Common\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IMService.File">
+    <Position X="6.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEAIAAAAA=</HashCode>
+      <FileName>File\File.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IMService.NeeoService" HideInheritanceLine="true">
+    <Position X="3.5" Y="4.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAAQAAAAAAAAAAAAAABAAAAAAAQIAAAAQAgAAAAAQAA=</HashCode>
+      <FileName>NeeoService.svc.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IMService.Contact">
+    <Position X="4" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAEgAAAAQBAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Contact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IMService.UserAgent">
+    <Position X="6.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAACAAAAAAAEAA=</HashCode>
+      <FileName>Entities\UserAgent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IMService.Activation">
+    <Position X="6.5" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABABAAABAAAAAAABIABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activation\Activation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IMService.DbManager" HideInheritanceLine="true">
+    <Position X="3.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="IMService.INeeo">
+    <Position X="0.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAAQAAAAAAAAAAAAAABAAAAAAAQIAAAAQAgAAAAAQAA=</HashCode>
+      <FileName>Interfaces\INeeo.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

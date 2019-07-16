@@ -1,0 +1,14 @@
+Neeo Web Service
+
+Pre-requisites:
+	-log4net
+	-twilio.api
+	-RestSharp
+	-PushSharp
+	
+Functionalities:
+
+testing
+
+
+

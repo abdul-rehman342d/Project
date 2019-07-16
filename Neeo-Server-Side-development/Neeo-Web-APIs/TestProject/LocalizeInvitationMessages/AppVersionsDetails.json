@@ -1,0 +1,21 @@
+{
+    //iOS Version
+    "1-NEEO-2.0.0": { "ash": false, "vsh": false, "psh": false, "vac": false, "vvc": false, "gch": false, "tp": false },
+    "1-NEEO-2.0.1": { "ash": false, "vsh": false, "psh": false, "vac": false, "vvc": false, "gch": false, "tp": false },
+    "1-NEEO-2.0.2": { "ash": false, "vsh": false, "psh": false, "vac": false, "vvc": false, "gch": false, "tp": false },
+    "1-NEEO-2.0.3": { "ash": false, "vsh": false, "psh": false, "vac": false, "vvc": false, "gch": false, "tp": false },
+    "1-NEEO-2.0.4": { "ash": false, "vsh": false, "psh": true, "vac": false, "vvc": false, "gch": false, "tp": true },
+    "1-NEEO-2.0.5": { "ash": false, "vsh": false, "psh": true, "vac": false, "vvc": false, "gch": false, "tp": true },
+    "1-NEEO-3.0.0": { "ash": false, "vsh": false, "psh": true, "vac": true, "vvc": false, "gch": false, "tp": true },
+    "1-NEEO-3.0.1": { "ash": false, "vsh": false, "psh": true, "vac": true, "vvc": false, "gch": false, "tp": true },
+    "1-NEEO-3.1.0": { "ash": false, "vsh": false, "psh": true, "vac": true, "vvc": false, "gch": true, "tp": true },
+    //Android Versions
+    "2-NEEO-1.0.0": { "ash": false, "vsh": false, "psh": false, "vac": false, "vvc": false, "gch": false, "tp": false },
+    "2-NEEO-1.0.1": { "ash": false, "vsh": false, "psh": false, "vac": false, "vvc": false, "gch": false, "tp": false },
+    "2-NEEO-1.0.2": { "ash": false, "vsh": false, "psh": false, "vac": false, "vvc": false, "gch": false, "tp": false },
+    "2-NEEO-1.0.3": { "ash": false, "vsh": false, "psh": false, "vac": false, "vvc": false, "gch": false, "tp": false },
+    "2-NEEO-1.0.4": { "ash": false, "vsh": false, "psh": true, "vac": false, "vvc": false, "gch": false, "tp": false },
+    "2-NEEO-1.0.5": { "ash": false, "vsh": false, "psh": true, "vac": false, "vvc": false, "gch": false, "tp": false },
+    "2-NEEO-2.0.0": { "ash": false, "vsh": false, "psh": true, "vac": false, "vvc": false, "gch": true, "tp": false },
+    "2-NEEO-3.0.0": { "ash": false, "vsh": false, "psh": true, "vac": true, "vvc": false, "gch": true, "tp": false }
+}

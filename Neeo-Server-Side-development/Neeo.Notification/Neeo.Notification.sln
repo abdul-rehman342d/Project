@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neeo.Notification", "Neeo.Notification\Neeo.Notification.csproj", "{140F14E6-663B-48D6-948D-67CB5511FE80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neeo.Notification.Test", "Neeo.Notification.Test\Neeo.Notification.Test.csproj", "{5FC7D5AC-C6BE-4132-8D42-F82B488BF4D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "E:\Personal Projects\PowerfulPal\Office Computer Code\Neeo-Server-Git\Neeo-Server\Neeo-Web-APIs\DAL\DAL.csproj", "{538B01B6-3A87-434F-87B9-4951C28BFE9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "E:\Personal Projects\PowerfulPal\Office Computer Code\Neeo-Server-Git\Neeo-Server\Neeo-Web-APIs\Logger\Logger.csproj", "{DAA1F017-A112-4068-A816-6A4B1DBEC8B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNeeo", "E:\Personal Projects\PowerfulPal\Office Computer Code\Neeo-Server-Git\Neeo-Server\Neeo-Web-APIs\LibNeeo\LibNeeo.csproj", "{7F87B015-7B43-4C6D-95CE-779750A1337C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "E:\Personal Projects\PowerfulPal\Office Computer Code\Neeo-Server-Git\Neeo-Server\Neeo-Web-APIs\Common\Common.csproj", "{9C32CDD2-05CB-40DA-A4F7-2A22AECC45CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pushy.Api", "E:\Personal Projects\PowerfulPal\Office Computer Code\Neeo-Server-Git\Neeo-Server\Neeo-Web-APIs\Pushy.Api\Pushy.Api.csproj", "{A9590B7E-1F18-4DD6-A9E6-9B5E56C6E8BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neeo.Notification.WinSvc", "Neeo.Notification.WinSvc\Neeo.Notification.WinSvc.csproj", "{5EFD2476-1F86-4133-A988-18B705A32291}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{140F14E6-663B-48D6-948D-67CB5511FE80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{140F14E6-663B-48D6-948D-67CB5511FE80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{140F14E6-663B-48D6-948D-67CB5511FE80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{140F14E6-663B-48D6-948D-67CB5511FE80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC7D5AC-C6BE-4132-8D42-F82B488BF4D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC7D5AC-C6BE-4132-8D42-F82B488BF4D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC7D5AC-C6BE-4132-8D42-F82B488BF4D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC7D5AC-C6BE-4132-8D42-F82B488BF4D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{538B01B6-3A87-434F-87B9-4951C28BFE9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{538B01B6-3A87-434F-87B9-4951C28BFE9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{538B01B6-3A87-434F-87B9-4951C28BFE9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{538B01B6-3A87-434F-87B9-4951C28BFE9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAA1F017-A112-4068-A816-6A4B1DBEC8B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAA1F017-A112-4068-A816-6A4B1DBEC8B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAA1F017-A112-4068-A816-6A4B1DBEC8B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAA1F017-A112-4068-A816-6A4B1DBEC8B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F87B015-7B43-4C6D-95CE-779750A1337C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F87B015-7B43-4C6D-95CE-779750A1337C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F87B015-7B43-4C6D-95CE-779750A1337C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F87B015-7B43-4C6D-95CE-779750A1337C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C32CDD2-05CB-40DA-A4F7-2A22AECC45CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C32CDD2-05CB-40DA-A4F7-2A22AECC45CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C32CDD2-05CB-40DA-A4F7-2A22AECC45CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C32CDD2-05CB-40DA-A4F7-2A22AECC45CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9590B7E-1F18-4DD6-A9E6-9B5E56C6E8BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9590B7E-1F18-4DD6-A9E6-9B5E56C6E8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9590B7E-1F18-4DD6-A9E6-9B5E56C6E8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9590B7E-1F18-4DD6-A9E6-9B5E56C6E8BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EFD2476-1F86-4133-A988-18B705A32291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EFD2476-1F86-4133-A988-18B705A32291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EFD2476-1F86-4133-A988-18B705A32291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EFD2476-1F86-4133-A988-18B705A32291}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+EndGlobal

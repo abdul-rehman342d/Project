@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7F87B015-7B43-4C6D-95CE-779750A1337C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LibNeeo</RootNamespace>
+    <AssemblyName>LibNeeo</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\LibNeeo.XML</DocumentationFile>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.4.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.4.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.4.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.6.9.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.6.9\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.4.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Twilio, Version=5.28.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.5.28.0\lib\net451\Twilio.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activation\NeeoActivation.cs" />
+    <Compile Include="IO\FileDataStream.cs" />
+    <Compile Include="IO\FileFactory.cs" />
+    <Compile Include="IO\Document.cs" />
+    <Compile Include="MediaSharing\MediaEnum.cs" />
+    <Compile Include="MediaSharing\MimeTypeMapping.cs" />
+    <Compile Include="MediaSharing\MediaUtility.cs" />
+    <Compile Include="MediaSharing\MimeTypeDetail.cs" />
+    <Compile Include="IO\NeeoDirectory.cs" />
+    <Compile Include="IO\GroupIconDirectory.cs" />
+    <Compile Include="IO\NeeoFileInfo.cs" />
+    <Compile Include="IO\ProfileDirectory.cs" />
+    <Compile Include="IO\SharedDirectory.cs" />
+    <Compile Include="MediaSharing\UploadSession.cs" />
+    <Compile Include="MediaSharing\UploadSessionManager.cs" />
+    <Compile Include="Model\UserPersonalData.cs" />
+    <Compile Include="NearByMe\Model\Country.cs" />
+    <Compile Include="NearByMe\Model\FriendRequestDetails.cs" />
+    <Compile Include="NearByMe\Model\FriendRequest.cs" />
+    <Compile Include="NearByMe\Model\FileInputModel.cs" />
+    <Compile Include="NearByMe\Model\FilesViewModel.cs" />
+    <Compile Include="NearByMe\Model\IFormFileExtensions.cs" />
+    <Compile Include="NearByMe\Model\UserSearch.cs" />
+    <Compile Include="NearByMe\NearByMeCountriesManager.cs" />
+    <Compile Include="NearByMe\NearByMeManager.cs" />
+    <Compile Include="NearByMe\NearByMePackageManager.cs" />
+    <Compile Include="NearByMe\Model\NearByMePromotion.cs" />
+    <Compile Include="NearByMe\Model\NearByMePromotionImage.cs" />
+    <Compile Include="NearByMe\NearByMePromotionManager.cs" />
+    <Compile Include="NearByMe\Model\NearByMePromotionPackage.cs" />
+    <Compile Include="NearByMe\Model\NearByMeSetting.cs" />
+    <Compile Include="NearByMe\Model\NearByMeUserPromotionsPackage.cs" />
+    <Compile Include="NearByMe\NearByUser.cs" />
+    <Compile Include="NearByMe\SearchedUser.cs" />
+    <Compile Include="NeeoUser.cs" />
+    <Compile Include="GeoLocation\GeoLocator.cs" />
+    <Compile Include="IO\Audio.cs" />
+    <Compile Include="IO\Image.cs" />
+    <Compile Include="IO\Video.cs" />
+    <Compile Include="Muc\GroupInfo.cs" />
+    <Compile Include="Muc\NeeoGroupChat.cs" />
+    <Compile Include="IO\FileManager.cs" />
+    <Compile Include="Plugin\UserPresence.cs" />
+    <Compile Include="Plugin\UserService.cs" />
+    <Compile Include="IO\File.cs" />
+    <Compile Include="Plugin\UserServiceStatus.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Network\Server.cs" />
+    <Compile Include="Network\FileServerManager.cs" />
+    <Compile Include="MediaSharing\SharedMedia.cs" />
+    <Compile Include="Resource\Background.cs" />
+    <Compile Include="Resource\IAppResource.cs" />
+    <Compile Include="Resource\IAppResourceFactory.cs" />
+    <Compile Include="Resource\IAppResourceFactory_2.cs" />
+    <Compile Include="Resource\ResourceFactory.cs" />
+    <Compile Include="Resource\ResourceManager.cs" />
+    <Compile Include="Search\NeeoSearch.cs" />
+    <Compile Include="SMS\SmsManager.cs" />
+    <Compile Include="Url\NeeoUrlBuilder.cs" />
+    <Compile Include="Voip\McrData.cs" />
+    <Compile Include="Voip\MissedCallRecord.cs" />
+    <Compile Include="Voip\NeeoVoip.cs" />
+    <Compile Include="Voip\VoipEnums.cs" />
+    <Compile Include="Voip\VoipResponse.cs" />
+    <Compile Include="Voip\VoipResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{9c32cdd2-05cb-40da-a4f7-2a22aecc45cb}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{538b01b6-3a87-434f-87b9-4951c28bfe9c}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{daa1f017-a112-4068-a816-6a4b1dbec8b7}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nexmo\Neeo.Nexmo.Api.csproj">
+      <Project>{20a30b09-d535-43c2-be88-14ad4f1b5a4b}</Project>
+      <Name>Neeo.Nexmo.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PowerfulPal.Sms\PowerfulPal.Sms.csproj">
+      <Project>{44d42a9c-8c45-464e-958a-4827541811b3}</Project>
+      <Name>PowerfulPal.Sms</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

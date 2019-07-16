@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<topic id="d875ce29-9394-4ba6-b1a7-e1ed38b4f612" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>This is a Neeo Services help guide. All detail neccessary to understand the service implementation is given here.</para>
+    </introduction>
+
+    <section>
+      <title>Getting Started</title>
+      <content>
+        <para>
+          There are four services and one file server application that are implemented to use with the client application
+          to carry out core features of the application.
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              <localUri>Activation Service</localUri> - It is responsible for verifying the user's phone number
+              by sending activation code to the user's phone number, for blocking and unblocking user based on the user blocking policy.
+              It is also responsible for activating user so that user can use the application with his/her device.
+            </para>
+          </listItem>
+
+          <listItem>
+            <para>
+              <localUri>Syncing Service</localUri> - It is responsible for checking the contacts list with the user
+              roster to determine the application user and roster user among the contact list and take action
+              across the contacts.
+            </para>
+          </listItem>
+
+          <listItem>
+            <para>
+              <localUri>File Sharing Service</localUri> - It is responsible for updating user profile information including its name
+              and user avatar, and getting user avatar. It is also responsible for sending offline files to the application user.
+            </para>
+          </listItem>
+
+          <listItem>
+            <para>
+              <localUri>Notification Service</localUri> - It is responsible for sending push notification to the user mobile device.
+            </para>
+          </listItem>
+
+          <listItem>
+            <para>
+              <localUri>File Store</localUri> - It is responsible for getting the user's stored files. It is used for getting 
+              user avatar as well as user's offline files.
+            </para>
+          </listItem>
+        </list>
+
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="6326ff2a-236e-44d1-a844-947d4e89efb3" />
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

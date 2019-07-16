@@ -1,0 +1,15 @@
+USE [Northwind]
+
+GO
+
+ALTER DATABASE [Northwind] SET TRUSTWORTHY ON
+
+Go
+
+CREATE ASSEMBLY SPAssembly
+
+FROM 'E:\Projects\Test Restful WCF Sevice\SQL_CRL\bin\Debug\SQL_CRL.dll'
+
+WITH PERMISSION_SET = UNSAFE;
+
+GO

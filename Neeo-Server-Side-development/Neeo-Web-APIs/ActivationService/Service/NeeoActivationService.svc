@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ActivationService.NeeoActivationService" Factory="System.ServiceModel.Activation.WebServiceHostFactory" CodeBehind="NeeoActivationService.svc.cs" %>

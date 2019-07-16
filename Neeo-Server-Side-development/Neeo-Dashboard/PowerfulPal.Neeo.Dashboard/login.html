@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Neeo Dashboard Login</title>
+    <script src="Script/CommonScript-v1.js?version=1.0"></script>
+    <link href="CSS/LoginStyle.css" rel="stylesheet" />
+    <script src="Script/jquery-1.11.2.min.js"></script>
+
+    <script src="Script/jquery.md5.js"></script>
+
+    <script src="Script/LoginScript-v1.js"></script>
+</head>
+<body>
+
+    <div id="rapper" class="rapper">
+        <div id="login_penal">
+            <div id="logo_side">
+                <div id="logo"></div>
+            </div>
+            <div id="login_side">
+                <table id="loginTable">
+                    <tr><td><label id="UserName_lable">Username</label></td></tr>
+                    <tr><td><input id="UserName_Input" type="text" maxlength="30" /></td></tr>
+                    <tr><td style="height: 5px;"></td></tr>
+                    <tr><td><label id="password_lable">Password</label></td></tr>
+                    <tr><td><input id="Password_Input" type="password" maxlength="30" /></td></tr>
+                    <tr><td  style="float:left;"><input id="remember_me_Checkbox" type="checkbox" style="float:none;"/> <span id="Remember_me" style="font-size:12px;cursor:pointer;"> Remember me</span></td></tr>
+                    <tr><td><button id="login_buttion" type="button" onclick="Login()">Login</button></td></tr>
+
+                  
+                    <tr><td><label id="reset_password">Reset Password</label></td></tr>
+
+
+                </table>
+            </div>
+        </div>
+        <div id="loaderRapper">
+            <div id="loader"></div>
+        </div>
+        <div id="MessageBox">text missing</div>
+    </div>
+
+</body>
+</html>

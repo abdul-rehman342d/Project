@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        #dashboardUpperManu {
+            position: relative;
+            width: 615px;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 10px;
+        }
+        #dashboardUpperManuLeftPart {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 16px;
+            height: 30px;
+            background-color: #efefef;
+            float: left;
+            border-top-left-radius: 10px;
+        }
+        /*#dashboardUpperManuLeftFirst {
+            width: 120px;
+            float: left;
+            transform: skewX(-24deg);
+            background-color: #6aba19;
+            color: white;
+        }*/
+
+        .dashboardUpperManuTabs {
+            width: 100px;
+            float: left;
+            color:black;
+            background-color: #efefef;
+            transform: skewX(-24deg);
+            border-right: 2px solid #6aba19;
+            cursor:pointer;
+        }
+
+        /*.dashboardUpperManuTabs:hover {
+            width: 100px;
+            float: left;
+            color: white;
+            background-color: #6aba19;
+            transform: skewX(-24deg);
+            border-right: 2px solid #6aba19;
+        }*/
+        .dashboardUpperManuSelectedTab {
+            width: 100px;
+            float: left;
+            color: white;
+            background-color: #6aba19;
+            transform: skewX(-24deg);
+            border-right: 2px solid #6aba19;
+            cursor: pointer;
+        }
+        .dashboardUpperManuTabsInnerDiv {
+            transform: skewX(24deg);
+            text-align: center;
+        }
+        #dashboardUpperManuLastPart {
+            position: absolute;
+            top: 0;
+            left: 529px;
+            width: 20px;
+            height: 30px;
+            background-color: #efefef;
+            float: left;
+            border-top-right-radius: 10px;
+        }
+
+    </style>
+    <script src="Script/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+          
+            $(".dashboardUpperManuTabs").click(function () {
+                $(".dashboardUpperManuSelectedTab").removeClass("dashboardUpperManuSelectedTab");
+                $(this).addClass("dashboardUpperManuSelectedTab");
+                $("#dashboardUpperManuLeftPart").css('backgroundColor', $("#dashboardUpperManuRegistrationTab").css('backgroundColor'));
+                $("#dashboardUpperManuLastPart").css('backgroundColor', $("#dashboardUpperManuQuarterlyTab").css('backgroundColor'));
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div id="dashboardUpperManu" >
+        <div id="dashboardUpperManuLeftPart"></div>
+
+        <div id="dashboardUpperManuRegistrationTab" class="dashboardUpperManuTabs" style="width:120px">
+            <div class="dashboardUpperManuTabsInnerDiv"> Registrations </div>
+        </div>
+
+        <div id="dashboardUpperManuDailyTab" class="dashboardUpperManuTabs">
+            <div class="dashboardUpperManuTabsInnerDiv"> Daily</div>
+        </div>
+
+        <div id="dashboardUpperManuWeeklyTab" class="dashboardUpperManuTabs">
+            <div class="dashboardUpperManuTabsInnerDiv"> weekly</div>
+        </div>
+
+        <div id="dashboardUpperManuMonthlyTab" class="dashboardUpperManuTabs">
+            <div class="dashboardUpperManuTabsInnerDiv"> Monthly </div>
+        </div>
+
+        <div id="dashboardUpperManuQuarterlyTab" class="dashboardUpperManuTabs" style="border-right:none;">
+            <div class="dashboardUpperManuTabsInnerDiv">Quarterly </div>
+        </div>
+
+        <div id="dashboardUpperManuLastPart"></div>
+    </div>
+</body>
+</html>

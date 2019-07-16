@@ -1,0 +1,880 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.experttexting.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.experttexting.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.experttexting.com">
+      <s:element name="SendSMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PWD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="APIKEY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FROM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MSG" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSMSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSMSResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSMSUnicode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PWD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="APIKEY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FROM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MSG" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSMSUnicodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSMSUnicodeResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ScheduleSMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PWD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="APIKEY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FROM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MSG" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ESTScheduleDatetime" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ScheduleSMSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ScheduleSMSResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryBalance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PWD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="APIKEY" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryBalanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryBalanceResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MsgStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PWD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="APIKEY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MsgId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MsgStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MsgStatusResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getUnreadInbox">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PWD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="APIKEY" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getUnreadInboxResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getUnreadInboxResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPriceList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PWD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="APIKEY" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPriceListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getPriceListResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPriceListWithNetworks">
+        <s:complexType />
+      </s:element>
+      <s:element name="getPriceListWithNetworksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getPriceListWithNetworksResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPriceWithNetworks">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="COUNTRYNAME" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPriceWithNetworksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getPriceWithNetworksResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SendSMSSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSMS" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSUnicodeSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSMSUnicode" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSUnicodeSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSMSUnicodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ScheduleSMSSoapIn">
+    <wsdl:part name="parameters" element="tns:ScheduleSMS" />
+  </wsdl:message>
+  <wsdl:message name="ScheduleSMSSoapOut">
+    <wsdl:part name="parameters" element="tns:ScheduleSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryBalanceSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryBalance" />
+  </wsdl:message>
+  <wsdl:message name="QueryBalanceSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="MsgStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:MsgStatus" />
+  </wsdl:message>
+  <wsdl:message name="MsgStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:MsgStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="getUnreadInboxSoapIn">
+    <wsdl:part name="parameters" element="tns:getUnreadInbox" />
+  </wsdl:message>
+  <wsdl:message name="getUnreadInboxSoapOut">
+    <wsdl:part name="parameters" element="tns:getUnreadInboxResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPriceListSoapIn">
+    <wsdl:part name="parameters" element="tns:getPriceList" />
+  </wsdl:message>
+  <wsdl:message name="getPriceListSoapOut">
+    <wsdl:part name="parameters" element="tns:getPriceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPriceListWithNetworksSoapIn">
+    <wsdl:part name="parameters" element="tns:getPriceListWithNetworks" />
+  </wsdl:message>
+  <wsdl:message name="getPriceListWithNetworksSoapOut">
+    <wsdl:part name="parameters" element="tns:getPriceListWithNetworksResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPriceWithNetworksSoapIn">
+    <wsdl:part name="parameters" element="tns:getPriceWithNetworks" />
+  </wsdl:message>
+  <wsdl:message name="getPriceWithNetworksSoapOut">
+    <wsdl:part name="parameters" element="tns:getPriceWithNetworksResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSHttpGetIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+    <wsdl:part name="FROM" type="s:string" />
+    <wsdl:part name="TO" type="s:string" />
+    <wsdl:part name="MSG" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSUnicodeHttpGetIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+    <wsdl:part name="FROM" type="s:string" />
+    <wsdl:part name="TO" type="s:string" />
+    <wsdl:part name="MSG" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSUnicodeHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="ScheduleSMSHttpGetIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+    <wsdl:part name="FROM" type="s:string" />
+    <wsdl:part name="TO" type="s:string" />
+    <wsdl:part name="MSG" type="s:string" />
+    <wsdl:part name="ESTScheduleDatetime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ScheduleSMSHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="QueryBalanceHttpGetIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryBalanceHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="MsgStatusHttpGetIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+    <wsdl:part name="MsgId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MsgStatusHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="getUnreadInboxHttpGetIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getUnreadInboxHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="getPriceListHttpGetIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getPriceListHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="getPriceListWithNetworksHttpGetIn" />
+  <wsdl:message name="getPriceListWithNetworksHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="getPriceWithNetworksHttpGetIn">
+    <wsdl:part name="COUNTRYNAME" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getPriceWithNetworksHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSHttpPostIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+    <wsdl:part name="FROM" type="s:string" />
+    <wsdl:part name="TO" type="s:string" />
+    <wsdl:part name="MSG" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSUnicodeHttpPostIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+    <wsdl:part name="FROM" type="s:string" />
+    <wsdl:part name="TO" type="s:string" />
+    <wsdl:part name="MSG" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSUnicodeHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="ScheduleSMSHttpPostIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+    <wsdl:part name="FROM" type="s:string" />
+    <wsdl:part name="TO" type="s:string" />
+    <wsdl:part name="MSG" type="s:string" />
+    <wsdl:part name="ESTScheduleDatetime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ScheduleSMSHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="QueryBalanceHttpPostIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryBalanceHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="MsgStatusHttpPostIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+    <wsdl:part name="MsgId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MsgStatusHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="getUnreadInboxHttpPostIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getUnreadInboxHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="getPriceListHttpPostIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="PWD" type="s:string" />
+    <wsdl:part name="APIKEY" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getPriceListHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="getPriceListWithNetworksHttpPostIn" />
+  <wsdl:message name="getPriceListWithNetworksHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="getPriceWithNetworksHttpPostIn">
+    <wsdl:part name="COUNTRYNAME" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getPriceWithNetworksHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:portType name="ExptTextingAPISoap">
+    <wsdl:operation name="SendSMS">
+      <wsdl:input message="tns:SendSMSSoapIn" />
+      <wsdl:output message="tns:SendSMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMultilingualSMS">
+      <wsdl:input name="SendSMSUnicode" message="tns:SendSMSUnicodeSoapIn" />
+      <wsdl:output name="SendSMSUnicode" message="tns:SendSMSUnicodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ScheduleSMS">
+      <wsdl:input message="tns:ScheduleSMSSoapIn" />
+      <wsdl:output message="tns:ScheduleSMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalance">
+      <wsdl:input message="tns:QueryBalanceSoapIn" />
+      <wsdl:output message="tns:QueryBalanceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MsgStatus">
+      <wsdl:input message="tns:MsgStatusSoapIn" />
+      <wsdl:output message="tns:MsgStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getUnreadInbox">
+      <wsdl:input message="tns:getUnreadInboxSoapIn" />
+      <wsdl:output message="tns:getUnreadInboxSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPriceList">
+      <wsdl:input message="tns:getPriceListSoapIn" />
+      <wsdl:output message="tns:getPriceListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPriceListWithNetworks">
+      <wsdl:input message="tns:getPriceListWithNetworksSoapIn" />
+      <wsdl:output message="tns:getPriceListWithNetworksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPriceWithNetworks">
+      <wsdl:input message="tns:getPriceWithNetworksSoapIn" />
+      <wsdl:output message="tns:getPriceWithNetworksSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ExptTextingAPIHttpGet">
+    <wsdl:operation name="SendSMS">
+      <wsdl:input message="tns:SendSMSHttpGetIn" />
+      <wsdl:output message="tns:SendSMSHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMultilingualSMS">
+      <wsdl:input name="SendSMSUnicode" message="tns:SendSMSUnicodeHttpGetIn" />
+      <wsdl:output name="SendSMSUnicode" message="tns:SendSMSUnicodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ScheduleSMS">
+      <wsdl:input message="tns:ScheduleSMSHttpGetIn" />
+      <wsdl:output message="tns:ScheduleSMSHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalance">
+      <wsdl:input message="tns:QueryBalanceHttpGetIn" />
+      <wsdl:output message="tns:QueryBalanceHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MsgStatus">
+      <wsdl:input message="tns:MsgStatusHttpGetIn" />
+      <wsdl:output message="tns:MsgStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getUnreadInbox">
+      <wsdl:input message="tns:getUnreadInboxHttpGetIn" />
+      <wsdl:output message="tns:getUnreadInboxHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPriceList">
+      <wsdl:input message="tns:getPriceListHttpGetIn" />
+      <wsdl:output message="tns:getPriceListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPriceListWithNetworks">
+      <wsdl:input message="tns:getPriceListWithNetworksHttpGetIn" />
+      <wsdl:output message="tns:getPriceListWithNetworksHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPriceWithNetworks">
+      <wsdl:input message="tns:getPriceWithNetworksHttpGetIn" />
+      <wsdl:output message="tns:getPriceWithNetworksHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ExptTextingAPIHttpPost">
+    <wsdl:operation name="SendSMS">
+      <wsdl:input message="tns:SendSMSHttpPostIn" />
+      <wsdl:output message="tns:SendSMSHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMultilingualSMS">
+      <wsdl:input name="SendSMSUnicode" message="tns:SendSMSUnicodeHttpPostIn" />
+      <wsdl:output name="SendSMSUnicode" message="tns:SendSMSUnicodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ScheduleSMS">
+      <wsdl:input message="tns:ScheduleSMSHttpPostIn" />
+      <wsdl:output message="tns:ScheduleSMSHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalance">
+      <wsdl:input message="tns:QueryBalanceHttpPostIn" />
+      <wsdl:output message="tns:QueryBalanceHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MsgStatus">
+      <wsdl:input message="tns:MsgStatusHttpPostIn" />
+      <wsdl:output message="tns:MsgStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getUnreadInbox">
+      <wsdl:input message="tns:getUnreadInboxHttpPostIn" />
+      <wsdl:output message="tns:getUnreadInboxHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPriceList">
+      <wsdl:input message="tns:getPriceListHttpPostIn" />
+      <wsdl:output message="tns:getPriceListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPriceListWithNetworks">
+      <wsdl:input message="tns:getPriceListWithNetworksHttpPostIn" />
+      <wsdl:output message="tns:getPriceListWithNetworksHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPriceWithNetworks">
+      <wsdl:input message="tns:getPriceWithNetworksHttpPostIn" />
+      <wsdl:output message="tns:getPriceWithNetworksHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ExptTextingAPISoap" type="tns:ExptTextingAPISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendSMS">
+      <soap:operation soapAction="http://www.experttexting.com/SendSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMultilingualSMS">
+      <soap:operation soapAction="http://www.experttexting.com/SendSMSUnicode" style="document" />
+      <wsdl:input name="SendSMSUnicode">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendSMSUnicode">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScheduleSMS">
+      <soap:operation soapAction="http://www.experttexting.com/ScheduleSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalance">
+      <soap:operation soapAction="http://www.experttexting.com/QueryBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MsgStatus">
+      <soap:operation soapAction="http://www.experttexting.com/MsgStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUnreadInbox">
+      <soap:operation soapAction="http://www.experttexting.com/getUnreadInbox" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceList">
+      <soap:operation soapAction="http://www.experttexting.com/getPriceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceListWithNetworks">
+      <soap:operation soapAction="http://www.experttexting.com/getPriceListWithNetworks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceWithNetworks">
+      <soap:operation soapAction="http://www.experttexting.com/getPriceWithNetworks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ExptTextingAPISoap12" type="tns:ExptTextingAPISoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendSMS">
+      <soap12:operation soapAction="http://www.experttexting.com/SendSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMultilingualSMS">
+      <soap12:operation soapAction="http://www.experttexting.com/SendSMSUnicode" style="document" />
+      <wsdl:input name="SendSMSUnicode">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendSMSUnicode">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScheduleSMS">
+      <soap12:operation soapAction="http://www.experttexting.com/ScheduleSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalance">
+      <soap12:operation soapAction="http://www.experttexting.com/QueryBalance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MsgStatus">
+      <soap12:operation soapAction="http://www.experttexting.com/MsgStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUnreadInbox">
+      <soap12:operation soapAction="http://www.experttexting.com/getUnreadInbox" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceList">
+      <soap12:operation soapAction="http://www.experttexting.com/getPriceList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceListWithNetworks">
+      <soap12:operation soapAction="http://www.experttexting.com/getPriceListWithNetworks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceWithNetworks">
+      <soap12:operation soapAction="http://www.experttexting.com/getPriceWithNetworks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ExptTextingAPIHttpGet" type="tns:ExptTextingAPIHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SendSMS">
+      <http:operation location="/SendSMS" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMultilingualSMS">
+      <http:operation location="/SendSMSUnicode" />
+      <wsdl:input name="SendSMSUnicode">
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output name="SendSMSUnicode">
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScheduleSMS">
+      <http:operation location="/ScheduleSMS" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalance">
+      <http:operation location="/QueryBalance" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MsgStatus">
+      <http:operation location="/MsgStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUnreadInbox">
+      <http:operation location="/getUnreadInbox" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceList">
+      <http:operation location="/getPriceList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceListWithNetworks">
+      <http:operation location="/getPriceListWithNetworks" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceWithNetworks">
+      <http:operation location="/getPriceWithNetworks" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ExptTextingAPIHttpPost" type="tns:ExptTextingAPIHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SendSMS">
+      <http:operation location="/SendSMS" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMultilingualSMS">
+      <http:operation location="/SendSMSUnicode" />
+      <wsdl:input name="SendSMSUnicode">
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output name="SendSMSUnicode">
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScheduleSMS">
+      <http:operation location="/ScheduleSMS" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalance">
+      <http:operation location="/QueryBalance" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MsgStatus">
+      <http:operation location="/MsgStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUnreadInbox">
+      <http:operation location="/getUnreadInbox" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceList">
+      <http:operation location="/getPriceList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceListWithNetworks">
+      <http:operation location="/getPriceListWithNetworks" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPriceWithNetworks">
+      <http:operation location="/getPriceWithNetworks" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ExptTextingAPI">
+    <wsdl:port name="ExptTextingAPISoap" binding="tns:ExptTextingAPISoap">
+      <soap:address location="https://www.experttexting.com/exptapi/exptsms.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ExptTextingAPISoap12" binding="tns:ExptTextingAPISoap12">
+      <soap12:address location="https://www.experttexting.com/exptapi/exptsms.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ExptTextingAPIHttpGet" binding="tns:ExptTextingAPIHttpGet">
+      <http:address location="https://www.experttexting.com/exptapi/exptsms.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ExptTextingAPIHttpPost" binding="tns:ExptTextingAPIHttpPost">
+      <http:address location="https://www.experttexting.com/exptapi/exptsms.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DashboardAPI", "DashboardAPI", "{D07C79A9-2D60-4F19-B80E-8D0556952BE7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DashboardUI", "DashboardUI", "{DFE11F95-490A-44AC-8149-EC3F729C6FAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerfulPal.Neeo.Dashboard", "PowerfulPal.Neeo.Dashboard\PowerfulPal.Neeo.Dashboard.csproj", "{B6624C52-8163-4CF5-9A2F-7CE3D6407EAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerfulPal.Neeo.DashboardAPI", "PowerfulPal.Neeo.DashboardAPI\PowerfulPal.Neeo.DashboardAPI.csproj", "{F0EF5220-020F-4D91-A446-CA67F5445701}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DashboardAPI.Libraries", "DashboardAPI.Libraries", "{D1513ED0-BD1F-4DA2-857C-122A1BAB1544}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{DAA1F017-A112-4068-A816-6A4B1DBEC8B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6624C52-8163-4CF5-9A2F-7CE3D6407EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6624C52-8163-4CF5-9A2F-7CE3D6407EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6624C52-8163-4CF5-9A2F-7CE3D6407EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6624C52-8163-4CF5-9A2F-7CE3D6407EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0EF5220-020F-4D91-A446-CA67F5445701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0EF5220-020F-4D91-A446-CA67F5445701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0EF5220-020F-4D91-A446-CA67F5445701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0EF5220-020F-4D91-A446-CA67F5445701}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAA1F017-A112-4068-A816-6A4B1DBEC8B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAA1F017-A112-4068-A816-6A4B1DBEC8B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAA1F017-A112-4068-A816-6A4B1DBEC8B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAA1F017-A112-4068-A816-6A4B1DBEC8B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F0EF5220-020F-4D91-A446-CA67F5445701} = {D07C79A9-2D60-4F19-B80E-8D0556952BE7}
+		{B6624C52-8163-4CF5-9A2F-7CE3D6407EAF} = {DFE11F95-490A-44AC-8149-EC3F729C6FAB}
+		{DAA1F017-A112-4068-A816-6A4B1DBEC8B7} = {D1513ED0-BD1F-4DA2-857C-122A1BAB1544}
+	EndGlobalSection
+EndGlobal
