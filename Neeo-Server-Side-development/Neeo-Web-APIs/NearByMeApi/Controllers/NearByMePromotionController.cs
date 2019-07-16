@@ -87,7 +87,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers
         //}
 
         /// <summery>
-        /// this api save images
+        /// This api save images.
         /// </summery>
         /// <param name="files">
         /// Field Name: files , Data Type: Collection of IFormFile, Description: mandatory parameter
