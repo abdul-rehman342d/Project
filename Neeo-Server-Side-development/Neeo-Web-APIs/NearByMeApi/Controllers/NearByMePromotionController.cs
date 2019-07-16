@@ -145,7 +145,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers
 
 
         /// <summery>
-        /// this api Create a new Promotion with Path
+        /// This api Creates a new Promotion with Path.
         /// </summery>
         /// <param name="promotion">
         /// Field Name: username , Data Type: string, Description: mandatory parameter
