@@ -72,7 +72,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers
         //            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
         //        }
         //        string path = HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["PromotionImagesPath"]);
-        //        bool operationCompleted = await System.Threading.Tasks.Task.Run(() => nearByMePromotionManager.InsertNearByMePromotion(promotion, path));
+         //   bool operationCompleted = await System.Threading.Tasks.Task.Run(() => nearByMePromotionManager.InsertNearByMePromotion(promotion, path));
         //        return Request.CreateResponse(HttpStatusCode.OK);
         //    }
         //    catch (ApplicationException applicationException)

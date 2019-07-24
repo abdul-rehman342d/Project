@@ -27,6 +27,7 @@ using Contact = Common.Contact;
 using Directory = System.IO.Directory;
 using LibNeeo.Model;
 
+
 namespace LibNeeo
 {
     /// <summary>
@@ -860,6 +861,23 @@ namespace LibNeeo
 
 
         #endregion
+
+
+        #region ChatBackUp
+
+        public async Task<bool> CreateXMLChatBackup(string sender, string messagesXml)
+        {
+            return await System.Threading.Tasks.Task.Run(() => _dbManager.CreateXMLChatBackup(sender, messagesXml));
+        }
+
+        public async Task<object> GetXMLChatBackup(string sender)
+        {
+            return await System.Threading.Tasks.Task.Run(() => _dbManager.GetXMLChatBackup(sender));
+        }
+
+
+        #endregion
+
 
     }
 }

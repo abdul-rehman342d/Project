@@ -108,6 +108,11 @@ namespace DAL
 
         //User
         private const string ProUpdateUserPersonalData = "spne_UpdateUserPersonalData";
+
+        //ChatBackUp
+        private const string ProneCreateXMLChatBackup = "spne_neCreateXMLChatBackup";
+        private const string ProneGetXMLChatBackup = "spne_neGetXMLChatBackup";
+
         #endregion
 
         #region Constructors
@@ -2457,7 +2462,81 @@ namespace DAL
 
         #endregion
 
+        #region User ChatBackUp
+
+     
+        public async Task<bool> CreateXMLChatBackup(string sender, string messagesXml)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = ProneCreateXMLChatBackup;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = _con;
+            cmd.Parameters.Add("@sender", SqlDbType.NVarChar, 64).Value = sender;
+            cmd.Parameters.Add("@messagesXml", SqlDbType.Xml).Value = messagesXml;
+            try
+            {
+                await _con.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
+                return true;
+            }
+            catch (SqlException sqlEx)
+            {
+                LogManager.CurrentInstance.ErrorLogger.LogError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, sqlEx.Message, sqlEx);
+                if (sqlEx.Number == NeeoConstants.DbInvalidUserCode)
+                    throw new ApplicationException(CustomHttpStatusCode.InvalidUser.ToString("D"));
+                else
+                    throw new ApplicationException(CustomHttpStatusCode.DatabaseOperationFailure.ToString("D"));
+            }
+            finally
+            {
+                if (_con.State != ConnectionState.Closed)
+                {
+                    _con.Close();
+                }
+            }
+        }
+
+        public async Task<DataTable> GetXMLChatBackup(string sender)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = ProneGetXMLChatBackup;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = _con;
+            cmd.Parameters.Add("@sender", SqlDbType.NVarChar, 64).Value = sender;
+         
+
+            
+            DataTable dbGetChatBackup = new DataTable();
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+
+            try
+            {
+                await System.Threading.Tasks.Task.Run(() => adp.Fill(dbGetChatBackup));
+
+                return dbGetChatBackup;
+            }
+            catch (SqlException sqlEx)
+            {
+                LogManager.CurrentInstance.ErrorLogger.LogError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, sqlEx.Message, sqlEx);
+                if (sqlEx.Number == NeeoConstants.DbInvalidUserCode)
+                    throw new ApplicationException(CustomHttpStatusCode.InvalidUser.ToString("D"));
+                else
+                    throw new ApplicationException(CustomHttpStatusCode.DatabaseOperationFailure.ToString("D"));
+            }
+            finally
+            {
+                if (_con.State != ConnectionState.Closed)
+                {
+                    _con.Close();
+                }
+            }
+        }
+
         #endregion
+
+        #endregion
+
+
 
 
     }
