@@ -18,7 +18,7 @@ namespace UtilityService.Controllers
         /// <summery>
         /// This api Create a Chat Backup of user
         /// </summery>
-        /// <param name="promotion">
+        /// <param name="chatBackupDTO">
         /// Field Name: sender , Data Type: string, Description: mandatory parameter
         /// Field Name: messagesXml , Data Type: xml, Description: Collection of Messages
         /// </param>
