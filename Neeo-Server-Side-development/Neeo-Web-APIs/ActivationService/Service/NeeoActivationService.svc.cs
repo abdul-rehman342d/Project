@@ -248,7 +248,7 @@ namespace ActivationService
                     {
                         //codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey);
                         // Amazaon message Service by M.Uzair
-                        codeSendingResult= Convert.ToInt16(SmsManager.SendThroughAmazon(ph, actCode, isRes, appKey));
+                        codeSendingResult= Convert.ToInt16(SmsManager.SendThroughAmazon(ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), isRes,1));
                         return codeSendingResult;
 
                     }

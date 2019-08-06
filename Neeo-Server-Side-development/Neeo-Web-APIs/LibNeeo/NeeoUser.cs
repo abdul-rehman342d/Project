@@ -600,7 +600,7 @@ namespace LibNeeo
                     {
                         //SmsManager.SendThroughSecondaryApi(NeeoUtility.FormatAsIntlPhoneNumber(contactsArray[i]),msgBody.Replace("!", Environment.NewLine));
                         //PowerfulPal.Sms.SmsManager.GetInstance().Twilio.SendSms(new[] { NeeoUtility.FormatAsIntlPhoneNumber(contactsArray[i]) }, msgBody.Replace("!", Environment.NewLine), languageCode != "en");
-                        amazonInstant.sendSms(contactsArray[i], msgBody.Replace("!", Environment.NewLine),out messageid,out messageid);
+                        SmsManager.SendThroughAmazon(contactsArray[i], msgBody.Replace("!", Environment.NewLine).ToString(), false,2);
                     }
                     catch (ApplicationException appEx)
                     {

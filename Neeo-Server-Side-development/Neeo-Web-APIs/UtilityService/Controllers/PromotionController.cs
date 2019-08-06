@@ -72,8 +72,10 @@ namespace UtilityService.Controllers
                         try
                         {
                             neeoUser.SendInvitation(invitation.UName, invitation.Contacts, invitation.Lang);
-                            return Request.CreateResponse(HttpStatusCode.OK, repsonse);
-                        }
+                        
+                        return Request.CreateResponse(HttpStatusCode.OK, repsonse);
+                      
+                    }
                         catch (ApplicationException appEx)
                         {
                             return Request.CreateErrorResponse((HttpStatusCode)Convert.ToInt16(appEx.Message), NeeoDictionaries.HttpStatusCodeDescriptionMapper[Convert.ToInt16(appEx.Message)]);

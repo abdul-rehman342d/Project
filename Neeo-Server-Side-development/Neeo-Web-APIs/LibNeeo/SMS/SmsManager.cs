@@ -216,17 +216,16 @@ namespace LibNeeo
                 }
             }
         }
-        public static bool SendThroughAmazon(string phoneNumber, string activationCode, bool isResend,string appKey)
+        public static bool SendThroughAmazon(string phoneNumber, string message, bool isResend, short messageType)
         {
             SMSLog currentSms = new SMSLog();
             currentSms.vendorMessageId = "XXX";
-            currentSms.messageBody = NeeoUtility.GetActivationMessage(activationCode, appKey);
+            currentSms.messageBody = message;
             currentSms.receiver = phoneNumber;
             currentSms.isResend = isResend;
             currentSms.isRegenerate = false;
-            currentSms.messageType = 1;
+            currentSms.messageType = messageType;
             currentSms.status = "XXX";
-            currentSms.appKey = appKey;
             try
             {
                 string messageid;
