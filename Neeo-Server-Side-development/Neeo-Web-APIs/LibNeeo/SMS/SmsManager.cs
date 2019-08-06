@@ -10,7 +10,12 @@ using Logger;
 using Neeo.Nexmo;
 using Twilio.Rest.Api.V2010.Account;
 using static Twilio.Rest.Api.V2010.Account.Call.FeedbackSummaryResource;
-
+using Amazon.SimpleNotificationService;
+using Amazon.SimpleNotificationService.Model;
+using DAL;
+using System.Threading.Tasks;
+using LibNeeo.SMS;
+using PowerfulPal.Sms;
 namespace LibNeeo
 {
     /// <summary>
@@ -18,6 +23,7 @@ namespace LibNeeo
     /// </summary>
     public static class SmsManager
     {
+        //temp Chaange:Class is Static by sir Zohaib
         #region Data Members
 
         /// <summary>
@@ -209,6 +215,41 @@ namespace LibNeeo
                     throw new ApplicationException(CustomHttpStatusCode.SmsApiException.ToString("D"));
                 }
             }
+        }
+        public static bool SendThroughAmazon(string phoneNumber, string activationCode, bool isResend,string appKey)
+        {
+            SMSLog currentSms = new SMSLog();
+            currentSms.vendorMessageId = "XXX";
+            currentSms.messageBody = NeeoUtility.GetActivationMessage(activationCode, appKey);
+            currentSms.receiver = phoneNumber;
+            currentSms.isResend = isResend;
+            currentSms.isRegenerate = false;
+            currentSms.messageType = 1;
+            currentSms.status = "XXX";
+            currentSms.appKey = appKey;
+            try
+            {
+                string messageid;
+                string messagestatus;
+                AmazonApi amazonInstant = new AmazonApi();
+                amazonInstant.sendSms(currentSms.receiver, currentSms.messageBody,out messageid,out messagestatus);
+                currentSms.vendorMessageId = messageid;
+                currentSms.status = messagestatus;
+                return true;
+            }
+            catch (Exception)
+            {
+                LogManager.CurrentInstance.ErrorLogger.LogError(
+                                   System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, "Amazon - Phone # : \"" + phoneNumber[0] + "\" - Status: " + currentSms.status + "\" - Receiver: " + currentSms.receiver);
+                throw new ApplicationException(CustomHttpStatusCode.SmsApiException.ToString("D"));
+            }
+            finally
+            {
+                DbManager _dbManager = new DbManager();
+                _dbManager.InsertSMSLog(currentSms.vendorMessageId, currentSms.receiver, currentSms.messageBody, currentSms.isResend, currentSms.isRegenerate,currentSms.messageType, currentSms.appKey, currentSms.status);
+            }
+
+
         }
 
         #endregion

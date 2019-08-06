@@ -246,7 +246,11 @@ namespace ActivationService
                     }
                     else
                     {
-                        codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey);
+                        //codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey);
+                        // Amazaon message Service by M.Uzair
+                        codeSendingResult= Convert.ToInt16(SmsManager.SendThroughAmazon(ph, actCode, isRes, appKey));
+                        return codeSendingResult;
+
                     }
                 }
                 catch (ApplicationException appExp)
@@ -598,6 +602,7 @@ namespace ActivationService
         /// </summary>
         /// <param name="uID">A string containing phone number as user id.</param>
         /// <param name="client">An object containing the client information.</param>
+        
         public string CheckAppCompatibility(string uID, UserAgent client)
         {
             uID = (uID != null) ? uID.Trim() : uID;

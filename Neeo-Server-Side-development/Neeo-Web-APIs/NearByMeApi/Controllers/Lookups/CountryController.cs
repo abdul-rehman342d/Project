@@ -57,7 +57,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers.Lookups
 
 
         [HttpGet]
-        [Route("GetCountryByCode")]
+        [Route("GetCountryByCode/{countryCode}")]
         [CacheFilter(TimeDuration = 10)]
         [CompressionFilter]
         public async Task<HttpResponseMessage> GetCountryByCode(string countryCode)

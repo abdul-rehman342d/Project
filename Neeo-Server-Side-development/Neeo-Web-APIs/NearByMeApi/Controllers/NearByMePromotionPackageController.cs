@@ -138,7 +138,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers
         /// <param name="packageId">The string containing the user phone number</param>
         /// <returns>Show that users Promotion Pacakages list</returns>
         [HttpGet]
-        [Route("GetPromotionPackageById")]
+        [Route("GetPromotionPackageById/{packageId}")]
         [CacheFilter(TimeDuration = 10)]
         [CompressionFilter]
         public async Task<HttpResponseMessage> GetNearByMePromotionPacakagesById(int packageId)
@@ -171,7 +171,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers
         /// <param name="countryId">The int containing the country id</param>
         /// <returns>Show that Country wise Promotion Pacakages list</returns>
         [HttpGet]
-        [Route("GetPromotionPackagesByCountry")]
+        [Route("GetPromotionPackagesByCountry/{countryId}")]
         [CacheFilter(TimeDuration = 10)]
         [CompressionFilter]
         public async Task<HttpResponseMessage> GetNearByMePromotionPackagesByCountry(int countryId)

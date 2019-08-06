@@ -26,7 +26,7 @@ using Newtonsoft.Json;
 using Contact = Common.Contact;
 using Directory = System.IO.Directory;
 using LibNeeo.Model;
-
+using PowerfulPal.Sms;
 
 namespace LibNeeo
 {
@@ -585,6 +585,13 @@ namespace LibNeeo
                         ? "(" + NeeoUtility.FormatAsIntlPhoneNumber(_userID) + ")"
                         : (profileName + " (" + NeeoUtility.FormatAsIntlPhoneNumber(_userID) + ")"))
                     : (uName + " (" + NeeoUtility.FormatAsIntlPhoneNumber(_userID) + ")")));
+
+
+
+            string messageid;
+            string messagestatus;
+            AmazonApi amazonInstant = new AmazonApi();
+
             for (int i = 0; i < contactsArray.Length; i++)
             {
                 if (ulong.TryParse(contactsArray[i], out temp))
@@ -592,7 +599,8 @@ namespace LibNeeo
                     try
                     {
                         //SmsManager.SendThroughSecondaryApi(NeeoUtility.FormatAsIntlPhoneNumber(contactsArray[i]),msgBody.Replace("!", Environment.NewLine));
-                        PowerfulPal.Sms.SmsManager.GetInstance().Twilio.SendSms(new[] { NeeoUtility.FormatAsIntlPhoneNumber(contactsArray[i]) }, msgBody.Replace("!", Environment.NewLine), languageCode != "en");
+                        //PowerfulPal.Sms.SmsManager.GetInstance().Twilio.SendSms(new[] { NeeoUtility.FormatAsIntlPhoneNumber(contactsArray[i]) }, msgBody.Replace("!", Environment.NewLine), languageCode != "en");
+                        amazonInstant.sendSms(contactsArray[i], msgBody.Replace("!", Environment.NewLine),out messageid,out messageid);
                     }
                     catch (ApplicationException appEx)
                     {

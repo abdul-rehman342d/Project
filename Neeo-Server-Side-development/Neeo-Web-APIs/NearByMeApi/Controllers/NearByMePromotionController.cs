@@ -357,7 +357,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers
         /// <remarks>Response: HTTP Status 200 And HttpStatusCode.Ok indicates that the request succeeded</remarks>
         /// <returns> All Details About User  </returns>
         [HttpGet]
-        [Route("GetPromotionById")]
+        [Route("GetPromotionById/{promotionId}")]
         [CacheFilter(TimeDuration = 10)]
         [CompressionFilter]
         public async Task<HttpResponseMessage> GetNearByMePromotionById(int promotionId)
@@ -392,7 +392,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers
         /// </param>
         ///  <remarks>Response: HTTP Status 200 And HttpStatusCode.Ok indicates that the request succeeded  </remarks>
         [HttpGet]
-        [Route("GetPersonalizedPromotionsForUser")]
+        [Route("GetPersonalizedPromotionsForUser/{username:regex(^([0-9]+)(\\s)*$)}/{advertiser}")]
         [CacheFilter(TimeDuration = 10)]
         [CompressionFilter]
         public async Task<HttpResponseMessage> GetPersonalNearByMePromotionByUserName(string username, string advertiser=null)
@@ -425,7 +425,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers
         /// <param name="username">
         ///  Field Name :username,  DataType: Nvarchar , Description:  username is target by the Promotion 
         /// <remarks>Response: HTTP Status 200 And HttpStatusCode.Ok indicates that the request succeeded</remarks>
-        [Route("GetAdvertiserPromotions")]
+        [Route("GetAdvertiserPromotions/{username:regex(^([0-9]+)(\\s)*$)}")]
         [HttpGet]
         [CacheFilter(TimeDuration = 10)]
         [CompressionFilter]
@@ -461,7 +461,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers
         /// <remarks>Response: HTTP Status 200 And HttpStatusCode.Ok indicates that the request succeeded</remarks>
         /// <returns> list of Top Country Name With Users Promotions  </returns>
         [HttpGet]
-        [Route("GetTopNPersonalizedPromotionsForUser")]
+        [Route("GetTopNPersonalizedPromotionsForUser/{username:regex(^([0-9]+)(\\s)*$)}/{top}/{advertiser}")]
         [CacheFilter(TimeDuration = 10)]
         [CompressionFilter]
         public async Task<HttpResponseMessage> GetTopNearByMePromotionByUserName(string username,int top, string advertiser = null)
@@ -568,7 +568,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers
         /// </param>
         ///  <remarks>Response: On Succesfull Execution</remarks>
         /// <returns>>Array Of Country Objects Is Returned by  Id Wise</returns>
-        [Route("GetAdvertisedAccountsByCountry")]
+        [Route("GetAdvertisedAccountsByCountry/{countryId}")]
         [HttpGet]
         [CacheFilter(TimeDuration = 10)]
         [CompressionFilter]

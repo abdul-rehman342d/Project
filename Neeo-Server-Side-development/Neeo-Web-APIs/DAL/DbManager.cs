@@ -113,6 +113,9 @@ namespace DAL
         private const string ProneCreateXMLChatBackup = "spne_neCreateXMLChatBackup";
         private const string ProneGetXMLChatBackup = "spne_neGetXMLChatBackup";
 
+        //Amazon
+        private const string ProcInsertSMSLog = "spne_InsertSMSLog";
+
         #endregion
 
         #region Constructors
@@ -2534,9 +2537,50 @@ namespace DAL
 
         #endregion
 
+        #region Amazon
+        public bool InsertSMSLog(string vendorMessageId,string receiver,string messageBody,bool isResend,bool isRegenerated,short messageType, string appKey,string status)
+        {
+            int count = 0;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = ProcInsertSMSLog;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = _con;
+            cmd.Parameters.Add("@vendorMessageId", SqlDbType.VarChar).Value = vendorMessageId;
+            cmd.Parameters.Add("@receiver", SqlDbType.VarChar, 64).Value = receiver;
+            cmd.Parameters.Add("@messageBody", SqlDbType.VarChar, 500).Value = messageBody;
+            cmd.Parameters.Add("@isResend", SqlDbType.Bit).Value = isResend;
+            cmd.Parameters.Add("@isRegenerate", SqlDbType.Bit).Value = isRegenerated;
+            cmd.Parameters.Add("@messageType", SqlDbType.SmallInt).Value = messageType;
+            cmd.Parameters.Add("@appKey", SqlDbType.VarChar, 250).Value = appKey;
+            cmd.Parameters.Add("@status", SqlDbType.VarChar, 250).Value = status;
+            try
+            {
+                _con.Open();
+                count = cmd.ExecuteNonQuery();
+                if (count == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SqlException sqlEx)
+            {
+                LogManager.CurrentInstance.ErrorLogger.LogError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, sqlEx.Message, sqlEx);
+                if (sqlEx.Number == NeeoConstants.DbInvalidUserCode)
+                    throw new ApplicationException(CustomHttpStatusCode.InvalidUser.ToString("D"));
+                else
+                    throw new ApplicationException(CustomHttpStatusCode.DatabaseOperationFailure.ToString("D"));
+            }
+            finally
+            {
+                if (_con.State != ConnectionState.Closed)
+                {
+                    _con.Close();
+                }
+            }
+        }
         #endregion
 
-
+        #endregion
 
 
     }

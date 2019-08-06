@@ -152,7 +152,6 @@ namespace PowerfulPal.Sms
                 case MessageStatus.InvalidSenderAddress:
                     LogManager.CurrentInstance.ErrorLogger.LogError(
                     System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, "Nexmo - Phone # : " + phoneNumber[0] + " Status : " + messageStatus.ToString() + ", Description : " + NexmoDictionaries.MessageStatusDescriptionDictionary[(short)messageStatus]);
-
                     throw new ApplicationException(CustomHttpStatusCode.SmsApiException.ToString("D"));
                     break;
             }
