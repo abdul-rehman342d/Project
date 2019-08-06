@@ -11,7 +11,7 @@ using UtilityService.Models;
 
 namespace UtilityService.Controllers
 {
-
+    [RoutePrefix("api/v1/user-chat")]
     public class ChatController : ApiController
     {
 
@@ -62,7 +62,7 @@ namespace UtilityService.Controllers
         /// <returns> All Details About User Messages  </returns>
 
         [HttpGet]
-        [Route("GetChatBackup")]
+        [Route("GetChatBackup/{sender}")]
         public async Task<HttpResponseMessage> GetChatBackup([FromUri] string sender)
         {
             try
