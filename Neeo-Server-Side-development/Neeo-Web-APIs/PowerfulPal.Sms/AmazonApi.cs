@@ -15,13 +15,14 @@ namespace PowerfulPal.Sms
     {
         public void sendSms(string phoneNumber,string messageBody,out string messageid,out string messagestatus)
         {
-
             string AWSAccessKeyId = ConfigurationManager.AppSettings["AWSAccessKeyId"].ToString();
             string AWSSecretKey = ConfigurationManager.AppSettings["AWSSecretKey"].ToString();
             var sns = new AmazonSimpleNotificationServiceClient(AWSAccessKeyId, AWSSecretKey, Amazon.RegionEndpoint.USWest2);
             PublishResponse message = sns.Publish(new PublishRequest() { PhoneNumber = phoneNumber, Message = messageBody, Subject = "NeeoApp Activation" });
             messageid = message.MessageId;
             messagestatus = message.HttpStatusCode.ToString();
+
         }
+
     }
 }
