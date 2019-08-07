@@ -67,6 +67,25 @@ namespace ActivationService
         // [TransactionFlow(TransactionFlowOption.Allowed)]
         int SendActCode(string ph, short dP, string actCode, bool isRes, bool isReg, string appKey, short sType);
 
+        /// <summary>
+        /// Sends activation code to the phone number provided in <paramref name="phoneNumber"/>.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="ph">A phone number on which activation code has to be sent.</param>
+        /// <param name="dP">Platform of the user's device.</param>
+        /// <param name="actCode">A code that has to be sent on the give phone number.</param>
+        /// <param name="isRes">A bool value indicating this is a resending code request if true,otherwise false (default value). </param>
+        /// <param name="isReg">A bool value indicating this is a regenerated code sending request if true,otherwise false (default value). </param>
+        /// <param name="appKey">A string containing the appKey(For Android).</param>
+        /// <param name="deviceInfo">A string which contain the calling device info. </param>
+        /// <param name="isDebugged">A bool to determine if used for debuging and no need to send sms   .</param>
+        /// <returns>An integer indicating whether the SMS has been sent successfully or not, or user is in blocked state.</returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/SendAppActivationCode", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        // [TransactionFlow(TransactionFlowOption.Allowed)]
+        int SendAppActivationCode(string ph, short dP, string actCode, bool isRes, bool isReg, string appKey, short sType, string deviceInfo, bool isDebugged );
+
         ///// <summary>
         ///// Sends activation code to the phone number provided in <paramref name="phoneNumber"/>.
         ///// </summary>

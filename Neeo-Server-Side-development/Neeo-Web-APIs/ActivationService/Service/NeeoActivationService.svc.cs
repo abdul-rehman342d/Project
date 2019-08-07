@@ -41,7 +41,7 @@ namespace ActivationService
         /// <param name="isResend">A bool value indicating this is a resending code request if true,otherwise false (default value). </param>
         /// <param name="isRegenerated">A bool value indicating this is a regenerated code sending request if true,otherwise false (default value). </param>
         /// <returns>An integer if 0 = sms has not been sent, 1 = sms has been successfully sent or remaining minutes to unblock user.</returns>
-        
+
         public int SendActivationCode(string phoneNumber, short devicePlatform, string activationCode, bool isResend, bool isRegenerated)
         {
 
@@ -246,11 +246,95 @@ namespace ActivationService
                     }
                     else
                     {
+                        if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] == "enabled")
+                            codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey);
+                        else
+                            codeSendingResult = Convert.ToInt16(SmsManager.SendThroughAmazon(ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), isRes, 1));
                         //codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey);
                         // Amazaon message Service by M.Uzair
-                        codeSendingResult= Convert.ToInt16(SmsManager.SendThroughAmazon(ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), isRes,1));
+                        //codeSendingResult = Convert.ToInt16(SmsManager.SendThroughAmazon(ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), isRes, 1));
                         return codeSendingResult;
+                    }
+                }
+                catch (ApplicationException appExp)
+                {
+                    NeeoUtility.SetServiceResponseHeaders((CustomHttpStatusCode)(Convert.ToInt32(appExp.Message)));
+                }
 
+                return codeSendingResult;
+            }
+
+            NeeoUtility.SetServiceResponseHeaders(CustomHttpStatusCode.InvalidArguments);
+            return codeSendingResult;
+        }
+
+        /// <summary>
+        /// Sends activation code to the phone number provided in <paramref name="ph"/>. It is a wrapping method with short parameter name.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="ph">A phone number on which activation code has to be sent.</param>
+        /// <param name="dP">Platform of the user's device.</param>
+        /// <param name="actCode">A code that has to be sent on the give phone number.</param>
+        /// <param name="isRes">A bool value indicating this is a resending code request if true,otherwise false (default value). </param>
+        /// <param name="isReg">A bool value indicating this is a regenerated code sending request if true,otherwise false (default value). </param>
+        /// <param name="appKey">A string containing the appKey(For Android).</param>
+        /// <returns>An integer if 0 = sms has not been sent, 1 = sms has been successfully sent or remaining minutes to unblock user.</returns>
+        /// <param name="deviceInfo">A string which contain the calling device info. </param>
+        /// <param name="isDebugged">A bool to determine if used for debuging and no need to send sms   .</param>
+        public int SendAppActivationCode(string ph, short dP, string actCode, bool isRes, bool isReg, string appKey, short sType, string deviceInfo, bool isDebugged)
+        {
+            #region log user request and response
+
+            /***********************************************
+             To log user request and response
+             ***********************************************/
+            if (_logRequestResponse)
+            {
+                LogManager.CurrentInstance.InfoLogger.LogInfo(
+                    System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, System.Reflection.MethodBase.GetCurrentMethod().Name + " ===> " +
+                    "Request ===> phoneNumber : " + ph + ", devicePlatform : " + dP +
+                    ", activationCode : " + actCode + ", isResend : " + isRes + ", isRegenerated : " + isReg + ", appKey : " + appKey + ", serviceType: " + sType);
+            }
+
+            #endregion
+
+            //return this.SendActivationCode(ph, dP, actCode, isRes, isReg);
+            ph = (ph != null) ? ph.Trim() : ph;
+            actCode = (actCode != null) ? actCode.Trim() : actCode;
+            appKey = appKey?.Trim();
+
+            int codeSendingResult = (int)SmsSendingStatus.SendingFailed;
+            DevicePlatform userDevicePlatform = (DevicePlatform)dP;
+            CodeSendingService codeSendingService = (CodeSendingService)sType;
+            uint tempActivationCode = 0;
+            ulong tempPhoneNumber = 0;
+            if (!NeeoUtility.IsNullOrEmpty(ph) && !NeeoUtility.IsNullOrEmpty(actCode) && Enum.IsDefined(typeof(DevicePlatform), dP) && Enum.IsDefined(typeof(CodeSendingService), sType) && uint.TryParse(actCode, out tempActivationCode) && ulong.TryParse(ph, out tempPhoneNumber))
+            {
+                try
+                {
+                    if (NeeoUtility.IsPhoneNumberInInternationalFormat(ph))
+                    {
+                        NeeoUtility.SetServiceResponseHeaders(CustomHttpStatusCode.InvalidNumber);
+                        return codeSendingResult;
+                    }
+                    if (!NeeoUtility.ValidatePhoneNumber(NeeoUtility.FormatAsIntlPhoneNumber(ph)) && _numberValidityCheck)
+                    {
+                        NeeoUtility.SetServiceResponseHeaders(CustomHttpStatusCode.InvalidNumber);
+                        return codeSendingResult;
+                    }
+
+                    if (codeSendingService == CodeSendingService.Call)
+                    {
+                        codeSendingResult = NeeoActivation.CallForActivationCode(ph, userDevicePlatform, actCode);
+                    }
+                    else
+                    {
+                        if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] == "enabled")
+                            codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey);                  
+                        else
+                            codeSendingResult = Convert.ToInt16(SmsManager.SendThroughAmazon(ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), isRes, 1));
+                        return codeSendingResult;
                     }
                 }
                 catch (ApplicationException appExp)
@@ -602,7 +686,7 @@ namespace ActivationService
         /// </summary>
         /// <param name="uID">A string containing phone number as user id.</param>
         /// <param name="client">An object containing the client information.</param>
-        
+
         public string CheckAppCompatibility(string uID, UserAgent client)
         {
             uID = (uID != null) ? uID.Trim() : uID;
