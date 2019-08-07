@@ -295,5 +295,10 @@ namespace Common
         /// Key for getting disable swagger value.
         /// </summary>
         public const string DisableSwagger = "disableSwagger";
+
+        /// <summary>
+        /// Key for the usage of Amazon sms service.
+        /// </summary>
+        public const string AWSStatus = "AWSStatus";
     }
 }
