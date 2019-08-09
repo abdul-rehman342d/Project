@@ -12,10 +12,11 @@ using Twilio.Rest.Api.V2010.Account;
 using static Twilio.Rest.Api.V2010.Account.Call.FeedbackSummaryResource;
 using Amazon.SimpleNotificationService;
 using Amazon.SimpleNotificationService.Model;
-using DAL;
 using System.Threading.Tasks;
 using LibNeeo.SMS;
 using PowerfulPal.Sms;
+using DAL;
+
 namespace LibNeeo
 {
     /// <summary>
@@ -216,37 +217,75 @@ namespace LibNeeo
                 }
             }
         }
-        public static bool SendThroughAmazon(string phoneNumber, string message, bool isResend, short messageType)
+        public static void SendThroughAmazon(string phoneNumber, string message, bool isResend, short messageType, bool logSMS, out string messageid, out string messagestatus)
         {
-            SMSLog currentSms = new SMSLog();
-            currentSms.vendorMessageId = "XXX";
-            currentSms.messageBody = message;
-            currentSms.receiver = phoneNumber;
-            currentSms.isResend = isResend;
-            currentSms.isRegenerate = false;
-            currentSms.messageType = messageType;
-            currentSms.status = "XXX";
-            try
+            if (logSMS)
             {
-                string messageid;
-                string messagestatus;
-                AmazonApi amazonInstant = new AmazonApi();
-                amazonInstant.sendSms(currentSms.receiver, currentSms.messageBody,out messageid,out messagestatus);
-                currentSms.vendorMessageId = messageid;
-                currentSms.status = messagestatus;
-                return true;
+                SMSLog currentSms = new SMSLog();
+                currentSms.vendorMessageId = "-1";
+                currentSms.messageBody = message;
+                currentSms.receiver = phoneNumber;
+                currentSms.appKey = "";
+                currentSms.isResend = isResend;
+                currentSms.isRegenerate = false;
+                currentSms.messageType = messageType;
+                currentSms.status = "XXX";
+
+                messageid = "-1";
+                messagestatus = "XXX";
+                try
+                {
+                    if (phoneNumber.StartsWith("994") || phoneNumber.StartsWith("33"))
+                    {
+                        currentSms.status = "FRAZ";
+                    }
+                    else
+                    {
+                        AmazonApi amazonInstant = new AmazonApi();
+                        amazonInstant.sendSms(currentSms.receiver, currentSms.messageBody, out messageid, out messagestatus);
+                        if (messageid.Length > 5 && messagestatus.Length > 0)
+                        {
+                            currentSms.vendorMessageId = messageid;
+                            currentSms.status = messagestatus;
+                        }
+
+                    }
+                }
+                catch (Exception)
+                {
+                    LogManager.CurrentInstance.ErrorLogger.LogError(
+                                       System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, "Amazon - Phone # : \"" + phoneNumber[0] + "\" - Status: " + currentSms.status + "\" - Receiver: " + currentSms.receiver);
+                    throw new ApplicationException(CustomHttpStatusCode.SmsApiException.ToString("D"));
+                }
+                finally
+                {                    
+                        DbManager _dbManager = new DbManager();
+                        _dbManager.InsertSMSLog(currentSms.vendorMessageId, currentSms.receiver, currentSms.messageBody, currentSms.isResend, currentSms.isRegenerate, currentSms.messageType, currentSms.appKey, currentSms.status);               
+                }
             }
-            catch (Exception)
-            {
-                LogManager.CurrentInstance.ErrorLogger.LogError(
-                                   System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, "Amazon - Phone # : \"" + phoneNumber[0] + "\" - Status: " + currentSms.status + "\" - Receiver: " + currentSms.receiver);
-                throw new ApplicationException(CustomHttpStatusCode.SmsApiException.ToString("D"));
+            else {
+                try
+                {
+                    messageid = "";
+                    messagestatus = "";
+                    AmazonApi amazonInstant = new AmazonApi();
+                    amazonInstant.sendSms(phoneNumber, message, out messageid, out messagestatus);
+
+                }
+                catch (Exception)
+                {
+                    LogManager.CurrentInstance.ErrorLogger.LogError(
+                                      System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, "Amazon - Phone # : \"" + phoneNumber[0]);
+                    throw new ApplicationException(CustomHttpStatusCode.SmsApiException.ToString("D"));
+                }
             }
-            finally
-            {
-                DbManager _dbManager = new DbManager();
-                _dbManager.InsertSMSLog(currentSms.vendorMessageId, currentSms.receiver, currentSms.messageBody, currentSms.isResend, currentSms.isRegenerate,currentSms.messageType, currentSms.appKey, currentSms.status);
-            }
+        }
+
+        public static void InsertActivationSMSLog(string vendorMessageId, string receiver, string messageBody, bool isResend, bool isRegenerate, short messageType, string appKey, string status,string deviceInfo, bool isDebugged)
+        {
+
+            DbManager _dbManager = new DbManager();
+            _dbManager.InsertActivationSMSLog(vendorMessageId,receiver,messageBody,isResend, isRegenerate,messageType,appKey,status,deviceInfo,isDebugged);
 
 
         }

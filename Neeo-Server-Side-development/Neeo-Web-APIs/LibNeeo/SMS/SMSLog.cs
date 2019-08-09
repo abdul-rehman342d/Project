@@ -16,5 +16,7 @@ namespace LibNeeo.SMS
         public short messageType { get; set; }
         public string appKey { get; set; }
         public string status { get; set; }
+        public string deviceInfo { get; set; }
+        public bool isDebugged { get; set; }
     }
 }

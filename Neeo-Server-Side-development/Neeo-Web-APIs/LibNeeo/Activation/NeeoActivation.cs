@@ -108,10 +108,11 @@ namespace LibNeeo.Activation
         /// <param name="activationCode"></param>
         /// <param name="appKey">A string containing the appKey(For Android).</param>
         /// <returns></returns>
-        public static int SendActivationCode(string phoneNumber, DevicePlatform devicePlatform, string activationCode, string appKey)
+        public static int SendActivationCode(string phoneNumber, DevicePlatform devicePlatform, string activationCode, string appKey,bool logSMS)
         {
             int smsSendingResult = (int)SmsSendingStatus.SendingFailed;
             string smsSendingSource = ConfigurationManager.AppSettings[NeeoConstants.SmsSendingSource]?? "default";
+            string messageBody = NeeoUtility.GetActivationMessage(activationCode, appKey);
             if (Enum.IsDefined(typeof(DevicePlatform), devicePlatform))
             {
                 var dbManager = new DbManager();
@@ -125,22 +126,22 @@ namespace LibNeeo.Activation
                             case UserState.NotBlocked:
                                 if (smsSendingSource.Trim() == "primary")
                                 {
-                                    PowerfulPal.Sms.SmsManager.GetInstance().PrimaryApi.SendSms(new[] { NeeoUtility.FormatAsIntlPhoneNumber(phoneNumber) }, NeeoUtility.GetActivationMessage(activationCode, appKey));
+                                    PowerfulPal.Sms.SmsManager.GetInstance().PrimaryApi.SendSms(new[] { NeeoUtility.FormatAsIntlPhoneNumber(phoneNumber) }, messageBody);
                                     smsSendingResult = (int)SmsSendingStatus.Sent;
                                 }
                                 else if (smsSendingSource.Trim() == "secondary")
                                 {
-                                    PowerfulPal.Sms.SmsManager.GetInstance().SecondaryApi.SendSms(new[] { NeeoUtility.FormatAsIntlPhoneNumber(phoneNumber) }, NeeoUtility.GetActivationMessage(activationCode, appKey));
+                                    PowerfulPal.Sms.SmsManager.GetInstance().SecondaryApi.SendSms(new[] { NeeoUtility.FormatAsIntlPhoneNumber(phoneNumber) }, messageBody);
                                     smsSendingResult = (int)SmsSendingStatus.Sent;
                                 }
                                 else if (userAttemptsDetails["attemptsCount"] % 2 == 0)
                                 {
-                                    PowerfulPal.Sms.SmsManager.GetInstance().SecondaryApi.SendSms(new[] { NeeoUtility.FormatAsIntlPhoneNumber(phoneNumber) }, NeeoUtility.GetActivationMessage(activationCode, appKey));
+                                    PowerfulPal.Sms.SmsManager.GetInstance().SecondaryApi.SendSms(new[] { NeeoUtility.FormatAsIntlPhoneNumber(phoneNumber) }, messageBody);
                                     smsSendingResult = (int)SmsSendingStatus.Sent;
                                 }
                                 else
                                 {
-                                    PowerfulPal.Sms.SmsManager.GetInstance().SendSms(new[] { NeeoUtility.FormatAsIntlPhoneNumber(phoneNumber) }, NeeoUtility.GetActivationMessage(activationCode, appKey));
+                                    PowerfulPal.Sms.SmsManager.GetInstance().SendSms(new[] { NeeoUtility.FormatAsIntlPhoneNumber(phoneNumber) }, messageBody);
                                     smsSendingResult = (int)SmsSendingStatus.Sent;
                                 }
                                 break;
@@ -163,6 +164,14 @@ namespace LibNeeo.Activation
                         dbManager.RollbackTransaction();
                         LogManager.CurrentInstance.ErrorLogger.LogError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, exp.Message, exp);
                         throw new ApplicationException(CustomHttpStatusCode.UnknownError.ToString("D"));
+                    }
+                    finally
+                    {
+                        if (logSMS)
+                        {
+                            DbManager _dbManager = new DbManager();
+                            _dbManager.InsertSMSLog("-1", phoneNumber, messageBody, false, false, 1, appKey, smsSendingResult.ToString());
+                        }
                     }
                 }
                 else

@@ -21,7 +21,6 @@ namespace PowerfulPal.Sms
             PublishResponse message = sns.Publish(new PublishRequest() { PhoneNumber = phoneNumber, Message = messageBody, Subject = "NeeoApp Activation" });
             messageid = message.MessageId;
             messagestatus = message.HttpStatusCode.ToString();
-
         }
 
     }

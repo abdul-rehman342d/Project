@@ -9,6 +9,7 @@ using LibNeeo.Activation;
 using LibNeeo;
 using Logger;
 using Newtonsoft.Json;
+using LibNeeo.SMS;
 
 namespace ActivationService
 {
@@ -239,35 +240,45 @@ namespace ActivationService
                         NeeoUtility.SetServiceResponseHeaders(CustomHttpStatusCode.InvalidNumber);
                         return codeSendingResult;
                     }
-
                     if (codeSendingService == CodeSendingService.Call)
                     {
                         codeSendingResult = NeeoActivation.CallForActivationCode(ph, userDevicePlatform, actCode);
                     }
                     else
                     {
-                        if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] == "enabled")
-                            codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey);
+                        if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] != "enabled")
+                        {
+                            //Twillo
+                            if (ph.StartsWith("994") || ph.StartsWith("33"))
+                            {
+                                SmsManager.InsertActivationSMSLog("-1",ph, NeeoUtility.GetActivationMessage(actCode, appKey), isRes, isReg, 1, appKey, "FRAZ", "", false);
+                            }
+                            else
+                            {
+                                codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey, true);
+                            }
+                        }
                         else
-                            codeSendingResult = Convert.ToInt16(SmsManager.SendThroughAmazon(ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), isRes, 1));
-                        //codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey);
-                        // Amazaon message Service by M.Uzair
-                        //codeSendingResult = Convert.ToInt16(SmsManager.SendThroughAmazon(ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), isRes, 1));
-                        return codeSendingResult;
+                        {
+                            //Amazon
+                            string vendorMessageId = "";
+                            string status = "";
+                            SmsManager.SendThroughAmazon(ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), isRes, 1, true, out vendorMessageId, out status);
+                            codeSendingResult = 1;
+                            return codeSendingResult;
+                        }
                     }
                 }
                 catch (ApplicationException appExp)
                 {
                     NeeoUtility.SetServiceResponseHeaders((CustomHttpStatusCode)(Convert.ToInt32(appExp.Message)));
                 }
-
                 return codeSendingResult;
             }
-
             NeeoUtility.SetServiceResponseHeaders(CustomHttpStatusCode.InvalidArguments);
             return codeSendingResult;
         }
-
+     
         /// <summary>
         /// Sends activation code to the phone number provided in <paramref name="ph"/>. It is a wrapping method with short parameter name.
         /// </summary>
@@ -311,37 +322,90 @@ namespace ActivationService
             ulong tempPhoneNumber = 0;
             if (!NeeoUtility.IsNullOrEmpty(ph) && !NeeoUtility.IsNullOrEmpty(actCode) && Enum.IsDefined(typeof(DevicePlatform), dP) && Enum.IsDefined(typeof(CodeSendingService), sType) && uint.TryParse(actCode, out tempActivationCode) && ulong.TryParse(ph, out tempPhoneNumber))
             {
+                SMSLog currentSms = new SMSLog();
+                currentSms.vendorMessageId = "-1";
+                currentSms.messageBody = NeeoUtility.GetActivationMessage(actCode, appKey).ToString();
+                currentSms.receiver = ph;
+                currentSms.isResend = isRes;
+                currentSms.isRegenerate = false;
+                currentSms.messageType = 1;
+                currentSms.appKey = appKey;
+                currentSms.status = "XXX";
+                currentSms.deviceInfo = deviceInfo;
+                currentSms.isDebugged = isDebugged;
+
+
+
+                if (NeeoUtility.IsPhoneNumberInInternationalFormat(ph))
+                {
+                    NeeoUtility.SetServiceResponseHeaders(CustomHttpStatusCode.InvalidNumber);
+                    return codeSendingResult;
+                }
+                if (!NeeoUtility.ValidatePhoneNumber(NeeoUtility.FormatAsIntlPhoneNumber(ph)) && _numberValidityCheck)
+                {
+                    NeeoUtility.SetServiceResponseHeaders(CustomHttpStatusCode.InvalidNumber);
+                    return codeSendingResult;
+                }
                 try
                 {
-                    if (NeeoUtility.IsPhoneNumberInInternationalFormat(ph))
-                    {
-                        NeeoUtility.SetServiceResponseHeaders(CustomHttpStatusCode.InvalidNumber);
-                        return codeSendingResult;
-                    }
-                    if (!NeeoUtility.ValidatePhoneNumber(NeeoUtility.FormatAsIntlPhoneNumber(ph)) && _numberValidityCheck)
-                    {
-                        NeeoUtility.SetServiceResponseHeaders(CustomHttpStatusCode.InvalidNumber);
-                        return codeSendingResult;
-                    }
-
                     if (codeSendingService == CodeSendingService.Call)
                     {
                         codeSendingResult = NeeoActivation.CallForActivationCode(ph, userDevicePlatform, actCode);
                     }
                     else
                     {
-                        if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] == "enabled")
-                            codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey);                  
+                        if (ph.StartsWith("994") || ph.StartsWith("33"))
+                        {
+                            if (currentSms.isDebugged == true)
+                            {
+                                currentSms.status = "Debugged";
+                            }
+                            else
+                            {
+                                currentSms.status = "FRAZ";
+                            }
+                        }
                         else
-                            codeSendingResult = Convert.ToInt16(SmsManager.SendThroughAmazon(ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), isRes, 1));
-                        return codeSendingResult;
+                        {
+                            if (isDebugged == false)
+                            {
+                                if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] != "enabled")
+                                {
+                                    codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey, false);  
+                                    currentSms.status = codeSendingResult.ToString();
+                                }
+
+
+                                else
+                                {
+                                    string vendorMessageId = "";
+                                    string status="";
+                                    SmsManager.SendThroughAmazon(ph, currentSms.messageBody, isRes, 1, false, out vendorMessageId, out status);
+                                    if(vendorMessageId.Length>5 && status.Length>0)
+                                    {
+                                        currentSms.vendorMessageId = vendorMessageId;
+                                        currentSms.status = status;
+                                    }
+                                    codeSendingResult = 1;
+                                }
+                            }
+                            else
+                            {
+                                currentSms.status = "Debugged";
+                            }
+                        }
                     }
                 }
                 catch (ApplicationException appExp)
                 {
                     NeeoUtility.SetServiceResponseHeaders((CustomHttpStatusCode)(Convert.ToInt32(appExp.Message)));
                 }
+                finally
+                {
 
+                   SmsManager.InsertActivationSMSLog(currentSms.vendorMessageId, currentSms.receiver, currentSms.messageBody, currentSms.isResend, currentSms.isRegenerate, currentSms.messageType, currentSms.appKey, currentSms.status, currentSms.deviceInfo, currentSms.isDebugged);
+
+                }
                 return codeSendingResult;
             }
 
@@ -489,8 +553,6 @@ namespace ActivationService
         /// Deletes user account and its all data from Neeo.
         /// </summary>
         /// <param name="uID">A string containing the user id. </param>
-
-
         #endregion
 
         public void UnregisterUser(string uID)

@@ -115,7 +115,10 @@ namespace DAL
 
         //Amazon
         private const string ProcInsertSMSLog = "spne_InsertSMSLog";
+        private const string ProcInsertActivationSMSLog = "spne_InsertActivationSMSLog";
 
+
+        
         #endregion
 
         #region Constructors
@@ -2579,6 +2582,51 @@ namespace DAL
 
             }
         }
+        public bool InsertActivationSMSLog(string vendorMessageId, string receiver, string messageBody, bool isResend, bool isRegenerated, short messageType, string appKey, string status,string deviceInfo, bool isDebugged)
+        {
+            int count = 0;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = ProcInsertActivationSMSLog;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = _con;
+            cmd.Parameters.Add("@messageBody", SqlDbType.VarChar, 500).Value = messageBody;
+            cmd.Parameters.Add("@receiver", SqlDbType.VarChar, 64).Value = receiver;
+            cmd.Parameters.Add("@isResend", SqlDbType.Bit).Value = isResend;
+            cmd.Parameters.Add("@isRegenerate", SqlDbType.Bit).Value = isRegenerated;
+            cmd.Parameters.Add("@vendorMessageId", SqlDbType.VarChar).Value = vendorMessageId;
+            cmd.Parameters.Add("@messageType", SqlDbType.SmallInt).Value = messageType;
+            cmd.Parameters.Add("@appKey", SqlDbType.VarChar, 250).Value = appKey;
+            cmd.Parameters.Add("@status", SqlDbType.VarChar, 250).Value = status;
+            cmd.Parameters.Add("@deviceInfo", SqlDbType.VarChar).Value = deviceInfo;
+            cmd.Parameters.Add("@isDebugged", SqlDbType.Bit).Value = isDebugged;
+
+            try
+            {
+                _con.Open();
+                count = cmd.ExecuteNonQuery();
+                if (count == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SqlException sqlEx)
+            {
+                LogManager.CurrentInstance.ErrorLogger.LogError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, sqlEx.Message, sqlEx);
+                if (sqlEx.Number == NeeoConstants.DbInvalidUserCode)
+                    throw new ApplicationException(CustomHttpStatusCode.InvalidUser.ToString("D"));
+                else
+                    throw new ApplicationException(CustomHttpStatusCode.DatabaseOperationFailure.ToString("D"));
+            }
+            finally
+            {
+                if (_con.State != ConnectionState.Closed)
+                {
+                    _con.Close();
+                }
+
+            }
+        }
+
         #endregion
 
         #endregion
