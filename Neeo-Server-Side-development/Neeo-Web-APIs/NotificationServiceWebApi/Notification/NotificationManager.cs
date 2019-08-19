@@ -159,7 +159,7 @@ namespace NotificationService
                             DevicePlatform = (DevicePlatform)Convert.ToInt16(userInfo[NeeoConstants.ReceiverUserDeviceplatform])
                         };
 
-                        if (!NeeoUtility.IsNullOrEmpty(userInfo[NeeoConstants.ReceiverDeviceToken]) && !NeeoUtility.IsNullOrEmpty(userInfo[NeeoConstants.CallerName]))
+                        if (!NeeoUtility.IsNullOrEmpty(userInfo[NeeoConstants.ReceiverDeviceToken]) || !NeeoUtility.IsNullOrEmpty(userInfo[NeeoConstants.CallerName]))
                         {
                             receiver.DeviceToken = userInfo[NeeoConstants.ReceiverDeviceToken].Trim();
                             receiver.PnSource =

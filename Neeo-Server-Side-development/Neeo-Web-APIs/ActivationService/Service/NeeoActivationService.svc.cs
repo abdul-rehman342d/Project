@@ -310,6 +310,12 @@ namespace ActivationService
 
             #endregion
 
+            if (deviceInfo == null)
+            {
+                deviceInfo = string.Empty;
+            }
+
+
             //return this.SendActivationCode(ph, dP, actCode, isRes, isReg);
             ph = (ph != null) ? ph.Trim() : ph;
             actCode = (actCode != null) ? actCode.Trim() : actCode;
@@ -392,6 +398,8 @@ namespace ActivationService
                             else
                             {
                                 currentSms.status = "Debugged";
+                                codeSendingResult = 1;
+
                             }
                         }
                     }
