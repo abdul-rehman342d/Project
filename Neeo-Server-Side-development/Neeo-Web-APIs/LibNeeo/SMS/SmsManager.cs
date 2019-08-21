@@ -106,7 +106,7 @@ namespace LibNeeo
         /// <returns>true if SMS is successfully sent; otherwise, false.</returns>
         public static void SendSms(string phoneNumber, string msgBody)
         {
-           SendThroughSecondaryApi(NeeoUtility.FormatAsIntlPhoneNumber(phoneNumber), msgBody);
+            SendThroughSecondaryApi(NeeoUtility.FormatAsIntlPhoneNumber(phoneNumber), msgBody);
         }
 
         /// <summary>
@@ -235,21 +235,20 @@ namespace LibNeeo
                 messagestatus = "XXX";
                 try
                 {
-                    if (phoneNumber.StartsWith("994") || phoneNumber.StartsWith("33"))
+                    //if (phoneNumber.StartsWith("994") || phoneNumber.StartsWith("33"))
+                    //{
+                    //    currentSms.status = "FRAZ";
+                    //}
+                    //else
+                    //{
+                    AmazonApi amazonInstant = new AmazonApi();
+                    amazonInstant.sendSms(currentSms.receiver, currentSms.messageBody, out messageid, out messagestatus);
+                    if (messageid.Length > 5 && messagestatus.Length > 0)
                     {
-                        currentSms.status = "FRAZ";
+                        currentSms.vendorMessageId = messageid;
+                        currentSms.status = messagestatus;
                     }
-                    else
-                    {
-                        AmazonApi amazonInstant = new AmazonApi();
-                        amazonInstant.sendSms(currentSms.receiver, currentSms.messageBody, out messageid, out messagestatus);
-                        if (messageid.Length > 5 && messagestatus.Length > 0)
-                        {
-                            currentSms.vendorMessageId = messageid;
-                            currentSms.status = messagestatus;
-                        }
-
-                    }
+                    // }
                 }
                 catch (Exception)
                 {
@@ -258,12 +257,13 @@ namespace LibNeeo
                     throw new ApplicationException(CustomHttpStatusCode.SmsApiException.ToString("D"));
                 }
                 finally
-                {                    
-                        DbManager _dbManager = new DbManager();
-                        _dbManager.InsertSMSLog(currentSms.vendorMessageId, currentSms.receiver, currentSms.messageBody, currentSms.isResend, currentSms.isRegenerate, currentSms.messageType, currentSms.appKey, currentSms.status);               
+                {
+                    DbManager _dbManager = new DbManager();
+                    _dbManager.InsertSMSLog(currentSms.vendorMessageId, currentSms.receiver, currentSms.messageBody, currentSms.isResend, currentSms.isRegenerate, currentSms.messageType, currentSms.appKey, currentSms.status);
                 }
             }
-            else {
+            else
+            {
                 try
                 {
                     messageid = "";
@@ -281,11 +281,11 @@ namespace LibNeeo
             }
         }
 
-        public static void InsertActivationSMSLog(string vendorMessageId, string receiver, string messageBody, bool isResend, bool isRegenerate, short messageType, string appKey, string status,string deviceInfo, bool isDebugged)
+        public static void InsertActivationSMSLog(string vendorMessageId, string receiver, string messageBody, bool isResend, bool isRegenerate, short messageType, string appKey, string status, string deviceInfo, bool isDebugged)
         {
 
             DbManager _dbManager = new DbManager();
-            _dbManager.InsertActivationSMSLog(vendorMessageId,receiver,messageBody,isResend, isRegenerate,messageType,appKey,status,deviceInfo,isDebugged);
+            _dbManager.InsertActivationSMSLog(vendorMessageId, receiver, messageBody, isResend, isRegenerate, messageType, appKey, status, deviceInfo, isDebugged);
 
 
         }

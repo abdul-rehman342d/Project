@@ -246,26 +246,33 @@ namespace ActivationService
                     }
                     else
                     {
-                        if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] != "enabled")
+                        if (NeeoActivation.CheckUserAlreadyRegistered(ph))
                         {
-                            //Twillo
-                            if (ph.StartsWith("994") || ph.StartsWith("33"))
+                            if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] != "enabled")
                             {
-                                SmsManager.InsertActivationSMSLog("-1",ph, NeeoUtility.GetActivationMessage(actCode, appKey), isRes, isReg, 1, appKey, "FRAZ", "", false);
+                                //Twillo
+                                //if (ph.StartsWith("994") || ph.StartsWith("33"))
+                                //{
+                                //    SmsManager.InsertActivationSMSLog("-1",ph, NeeoUtility.GetActivationMessage(actCode, appKey), isRes, isReg, 1, appKey, "FRAZ", "", false);
+                                //}
+                                //else
+                                //{
+                                codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey, true);
+                                //}
                             }
                             else
                             {
-                                codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey, true);
+                                //Amazon
+                                string vendorMessageId = "";
+                                string status = "";
+                                SmsManager.SendThroughAmazon(ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), isRes, 1, true, out vendorMessageId, out status);
+                                codeSendingResult = 1;
+                                return codeSendingResult;
                             }
                         }
-                        else
-                        {
-                            //Amazon
-                            string vendorMessageId = "";
-                            string status = "";
-                            SmsManager.SendThroughAmazon(ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), isRes, 1, true, out vendorMessageId, out status);
-                            codeSendingResult = 1;
-                            return codeSendingResult;
+                        else {                            
+                            codeSendingResult = -1;
+                            SmsManager.InsertActivationSMSLog("-1", ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), false, false, 1, "", "UnRegisteredUser", "", false);
                         }
                     }
                 }
@@ -360,47 +367,54 @@ namespace ActivationService
                     }
                     else
                     {
-                        if (ph.StartsWith("994") || ph.StartsWith("33"))
+
+                        if (NeeoActivation.CheckUserAlreadyRegistered(ph))
                         {
-                            if (currentSms.isDebugged == true)
+                            /*
+                            if (ph.StartsWith("994") || ph.StartsWith("33"))
                             {
-                                currentSms.status = "Debugged";
-                            }
-                            else
-                            {
-                                currentSms.status = "FRAZ";
-                            }
-                        }
-                        else
-                        {
-                            if (isDebugged == false)
-                            {
-                                if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] != "enabled")
+                                if (currentSms.isDebugged == true)
                                 {
-                                    codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey, false);  
-                                    currentSms.status = codeSendingResult.ToString();
+                                    currentSms.status = "Debugged";
                                 }
-
-
                                 else
                                 {
-                                    string vendorMessageId = "";
-                                    string status="";
-                                    SmsManager.SendThroughAmazon(ph, currentSms.messageBody, isRes, 1, false, out vendorMessageId, out status);
-                                    if(vendorMessageId.Length>5 && status.Length>0)
-                                    {
-                                        currentSms.vendorMessageId = vendorMessageId;
-                                        currentSms.status = status;
-                                    }
-                                    codeSendingResult = 1;
+                                    currentSms.status = "FRAZ";
                                 }
                             }
                             else
-                            {
-                                currentSms.status = "Debugged";
-                                codeSendingResult = 1;
+                            {*/
+                                if (isDebugged == false)
+                                {
+                                    if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] != "enabled")
+                                    {
+                                        codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey, false);
+                                        currentSms.status = codeSendingResult.ToString();
+                                    }
+                                else
+                                    {
+                                        string vendorMessageId = "";
+                                        string status = "";
+                                        SmsManager.SendThroughAmazon(ph, currentSms.messageBody, isRes, 1, false, out vendorMessageId, out status);
+                                        if (vendorMessageId.Length > 5 && status.Length > 0)
+                                        {
+                                            currentSms.vendorMessageId = vendorMessageId;
+                                            currentSms.status = status;
+                                        }
+                                        codeSendingResult = 1;
+                                    }
+                                }
+                                else
+                                {
+                                    currentSms.status = "Debugged";
+                                    codeSendingResult = 1;
 
-                            }
+                                }
+                           // }
+                        }
+                        else {
+                            currentSms.status = "UnRegisteredUser";
+                            codeSendingResult = -1;
                         }
                     }
                 }
