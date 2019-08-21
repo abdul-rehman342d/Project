@@ -19,6 +19,7 @@ using NotificationService.Models;
 
 namespace NotificationService
 {
+    [RoutePrefix("Notification")]
     public class NotificationController : ApiController
     {
         private bool _logRequestResponse =
@@ -27,6 +28,7 @@ namespace NotificationService
         
         
         [HttpPost]
+        [Route("Send")]
         public HttpResponseMessage Send([FromBody]Notification notification)
         {
             #region log user request and response

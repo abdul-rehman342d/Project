@@ -293,7 +293,7 @@ namespace ActivationService
         /// <returns>An integer if 0 = sms has not been sent, 1 = sms has been successfully sent or remaining minutes to unblock user.</returns>
         /// <param name="deviceInfo">A string which contain the calling device info. </param>
         /// <param name="isDebugged">A bool to determine if used for debuging and no need to send sms   .</param>
-        public int SendAppActivationCode(string ph, short dP, string actCode, bool isRes, bool isReg, string appKey, short sType, string deviceInfo, bool isDebugged)
+        public object SendAppActivationCode(string ph, short dP, string actCode, bool isRes, bool isReg, string appKey, short sType, string deviceInfo, bool isDebugged)
         {
             #region log user request and response
 
@@ -406,11 +406,11 @@ namespace ActivationService
                    SmsManager.InsertActivationSMSLog(currentSms.vendorMessageId, currentSms.receiver, currentSms.messageBody, currentSms.isResend, currentSms.isRegenerate, currentSms.messageType, currentSms.appKey, currentSms.status, currentSms.deviceInfo, currentSms.isDebugged);
 
                 }
-                return codeSendingResult;
+                return new { SendActCodeResult = codeSendingResult };
             }
 
             NeeoUtility.SetServiceResponseHeaders(CustomHttpStatusCode.InvalidArguments);
-            return codeSendingResult;
+            return new{ SendActCodeResult = codeSendingResult };
         }
 
         ///// <summary>

@@ -84,7 +84,7 @@ namespace ActivationService
         [OperationContract]
         [WebInvoke(UriTemplate = "/SendAppActivationCode", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
         // [TransactionFlow(TransactionFlowOption.Allowed)]
-        int SendAppActivationCode(string ph, short dP, string actCode, bool isRes, bool isReg, string appKey, short sType, string deviceInfo, bool isDebugged );
+        object SendAppActivationCode(string ph, short dP, string actCode, bool isRes, bool isReg, string appKey, short sType, string deviceInfo, bool isDebugged );
 
         ///// <summary>
         ///// Sends activation code to the phone number provided in <paramref name="phoneNumber"/>.
