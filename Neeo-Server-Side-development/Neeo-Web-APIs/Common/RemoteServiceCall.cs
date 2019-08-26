@@ -25,6 +25,7 @@ namespace Common
                 var content = JsonConvert.DeserializeObject<object>(response.Content);
                 return content;
             }
+
             else
             {
                 return null;
