@@ -18,6 +18,16 @@ namespace Common
         //Mac = 5
     }
 
+
+    public enum RType
+    {
+        POST,
+        GET,
+        PUT,
+        DELETE
+
+    }
+
     /// <summary>
     /// Specifies the code sending service
     /// </summary>

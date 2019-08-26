@@ -2,6 +2,7 @@
 using Common.Controllers;
 using Compression;
 using LibNeeo.NearByMe;
+using PowerfulPal.Neeo.NearByMeApi.Filter;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -31,6 +32,7 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers.Lookups
         [Route("GetAllCountries")]
         [CacheFilter(TimeDuration = 10)]
         [CompressionFilter]
+        [AuthorizationFilter]
         public async  Task<HttpResponseMessage> GetAllCountries()
         {
             try

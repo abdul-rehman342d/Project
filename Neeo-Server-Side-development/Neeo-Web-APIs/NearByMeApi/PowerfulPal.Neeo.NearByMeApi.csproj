@@ -183,6 +183,7 @@
     <Compile Include="Controllers\NearByMeController.cs" />
     <Compile Include="Controllers\NearByMePromotionController.cs" />
     <Compile Include="Controllers\UserSearchController.cs" />
+    <Compile Include="Filter\AuthorizationFilter.cs" />
     <Compile Include="Filter\CacheFilter.cs" />
     <Compile Include="Filter\CompressionFilter.cs" />
     <Compile Include="Global.asax.cs">
