@@ -461,6 +461,22 @@ namespace LibNeeo.Activation
         }
 
         /// <summary>
+        /// Check the existence of the account based on the user phone number.
+        /// </summary>
+        /// <param name="phoneNumber">A string containing user's phone number.</param>
+        /// <returns>true if account is existed otherwise false.</returns>
+        public static bool CheckUserAlreadyRegistered(string phoneNumber)
+        {
+            DbManager dbManager = new DbManager();
+            if (dbManager.CheckUserAlreadyRegistered(phoneNumber))
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        /// <summary>
         /// Deletes user account from Neeo.
         /// </summary>
         /// <param name="userID">A string containing the user id.</param>

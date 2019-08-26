@@ -35,6 +35,9 @@
     <StartupObject>WinOpenFireService.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Logger">
+      <HintPath>bin\Logger.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
@@ -70,12 +73,6 @@
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Logger\Logger.csproj">
-      <Project>{daa1f017-a112-4068-a816-6a4b1dbec8b7}</Project>
-      <Name>Logger</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
