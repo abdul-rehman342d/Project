@@ -370,6 +370,7 @@ namespace ActivationService
 
                         if (NeeoActivation.CheckUserAlreadyRegistered(ph))
                         {
+
                             /*
                             if (ph.StartsWith("994") || ph.StartsWith("33"))
                             {
