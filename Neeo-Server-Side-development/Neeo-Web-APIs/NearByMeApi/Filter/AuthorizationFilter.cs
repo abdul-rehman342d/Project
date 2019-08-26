@@ -15,18 +15,19 @@ namespace PowerfulPal.Neeo.NearByMeApi.Filter
         {
             IEnumerable<string> headerValues = actionExecutedContext.Request.Headers.GetValues("Autherize");
             string token = headerValues.FirstOrDefault();
-            RemoteServiceCall remoteCall = new RemoteServiceCall();
+          
             //Parameters
             string baseUrl = ConfigurationManager.AppSettings["authenticationBaseUrl"];
             string postUrl = ConfigurationManager.AppSettings["authenticationPostUrl"];
-           
+
+            RemoteServiceCall remoteCall = new RemoteServiceCall();
             dynamic result = remoteCall.restApiCall(baseUrl, postUrl, RType.POST, new
             {
                 uID = "",
                 key = "",
                 token = token,
             });
-            string output = Convert.ToString(result.username);
+            string output = Convert.ToString(result);
             if (output == null || output=="")
             {
                 actionExecutedContext.Response = new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized);
