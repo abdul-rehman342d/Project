@@ -246,7 +246,7 @@ namespace ActivationService
                     }
                     else
                     {
-                        if (NeeoActivation.CheckUserAlreadyRegistered(ph))
+                        //if (NeeoActivation.CheckUserAlreadyRegistered(ph))
                         {
                             if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] != "enabled")
                             {
@@ -270,10 +270,10 @@ namespace ActivationService
                                 return codeSendingResult;
                             }
                         }
-                        else {                            
-                            codeSendingResult = -1;
-                            SmsManager.InsertActivationSMSLog("-1", ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), false, false, 1, "", "UnRegisteredUser", "", false);
-                        }
+                        //else {                            
+                        //    codeSendingResult = -1;
+                        //    SmsManager.InsertActivationSMSLog("-1", ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), false, false, 1, "", "UnRegisteredUser", "", false);
+                        //}
                     }
                 }
                 catch (ApplicationException appExp)
@@ -368,7 +368,7 @@ namespace ActivationService
                     else
                     {
 
-                        if (NeeoActivation.CheckUserAlreadyRegistered(ph))
+                        //if (NeeoActivation.CheckUserAlreadyRegistered(ph))
                         {
                             /*
                             if (ph.StartsWith("994") || ph.StartsWith("33"))
@@ -412,10 +412,10 @@ namespace ActivationService
                                 }
                            // }
                         }
-                        else {
-                            currentSms.status = "UnRegisteredUser";
-                            codeSendingResult = -1;
-                        }
+                        //else {
+                        //    currentSms.status = "UnRegisteredUser";
+                        //    codeSendingResult = -1;
+                        //}
                     }
                 }
                 catch (ApplicationException appExp)
