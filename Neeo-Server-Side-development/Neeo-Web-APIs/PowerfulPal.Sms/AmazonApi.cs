@@ -18,7 +18,7 @@ namespace PowerfulPal.Sms
         {
             string AWSAccessKeyId = ConfigurationManager.AppSettings["AWSAccessKeyId"].ToString();
             string AWSSecretKey = ConfigurationManager.AppSettings["AWSSecretKey"].ToString();
-            var sns = new AmazonSimpleNotificationServiceClient(AWSAccessKeyId, AWSSecretKey, Amazon.RegionEndpoint.APSoutheast2);
+            var sns = new AmazonSimpleNotificationServiceClient(AWSAccessKeyId, AWSSecretKey, Amazon.RegionEndpoint.USEast1);
 
 
             var smsAttributes = new Dictionary<string, MessageAttributeValue>();
