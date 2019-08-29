@@ -477,6 +477,30 @@ namespace LibNeeo.Activation
 
 
         /// <summary>
+        /// Checks whether user's registeration request exists or not. 
+        /// </summary>
+        /// <param name="phoneNumber">A string containing user's phone number.</param>
+        /// <returns>true if user request exists otherwise false.</returns>
+        public static bool  CheckUserRegisterationRequest(string phoneNumber)
+        {
+            DbManager dbManager = new DbManager();       
+            return dbManager.CheckUserRegisterationRequest(phoneNumber);
+        }
+
+        /// <summary>
+        /// Insert a log record for user registeration request
+        /// </summary>
+        /// <param name="username">A string containing the user id.</param>
+        /// <param name="latitude">A float contain latitude value.</param>
+        /// <param name="longitude">A float contain longitude value.</param>
+        /// <returns>Returns true on successful insertion.</returns>
+        public static bool InsertMembersRequestsLog(string username, float latitude, float longitude)
+        {            
+            DbManager dbManager = new DbManager();
+            return dbManager.InsertMembersRequestsLog(username, latitude, longitude);         
+        }
+
+        /// <summary>
         /// Deletes user account from Neeo.
         /// </summary>
         /// <param name="userID">A string containing the user id.</param>

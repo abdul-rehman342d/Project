@@ -226,6 +226,10 @@ namespace ActivationService
             CodeSendingService codeSendingService = (CodeSendingService)sType;
             uint tempActivationCode = 0;
             ulong tempPhoneNumber = 0;
+
+            string restrictSpecifiedAeasSMS = ConfigurationManager.AppSettings[NeeoConstants.RestrictSpecifiedAeasSMS];
+            string registerationRequestCheckEnable = ConfigurationManager.AppSettings[NeeoConstants.EnableRegisterationRequestCheck];
+
             if (!NeeoUtility.IsNullOrEmpty(ph) && !NeeoUtility.IsNullOrEmpty(actCode) && Enum.IsDefined(typeof(DevicePlatform), dP) && Enum.IsDefined(typeof(CodeSendingService), sType) && uint.TryParse(actCode, out tempActivationCode) && ulong.TryParse(ph, out tempPhoneNumber))
             {
                 try
@@ -246,19 +250,19 @@ namespace ActivationService
                     }
                     else
                     {
-                        //if (NeeoActivation.CheckUserAlreadyRegistered(ph))
+                        if (registerationRequestCheckEnable == "0" ||NeeoActivation.CheckUserRegisterationRequest(ph))
                         {
                             if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] != "enabled")
                             {
-                                //Twillo
-                                //if (ph.StartsWith("994") || ph.StartsWith("33"))
-                                //{
-                                //    SmsManager.InsertActivationSMSLog("-1",ph, NeeoUtility.GetActivationMessage(actCode, appKey), isRes, isReg, 1, appKey, "FRAZ", "", false);
-                                //}
-                                //else
-                                //{
-                                codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey, true);
-                                //}
+
+                                if (restrictSpecifiedAeasSMS == "1" && (ph.StartsWith("994") || ph.StartsWith("33")))
+                                {
+                                    SmsManager.InsertActivationSMSLog("-1", ph, NeeoUtility.GetActivationMessage(actCode, appKey), isRes, isReg, 1, appKey, "FRAZ", "", false);
+                                }
+                                else
+                                {
+                                    codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey, true);
+                                }
                             }
                             else
                             {
@@ -270,10 +274,11 @@ namespace ActivationService
                                 return codeSendingResult;
                             }
                         }
-                        //else {                            
-                        //    codeSendingResult = -1;
-                        //    SmsManager.InsertActivationSMSLog("-1", ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), false, false, 1, "", "UnRegisteredUser", "", false);
-                        //}
+                        else
+                        {
+                            codeSendingResult = -1;
+                            SmsManager.InsertActivationSMSLog("-1", ph, NeeoUtility.GetActivationMessage(actCode, appKey).ToString(), false, false, 1, "", "UnRegisteredUser", "", false);
+                        }
                     }
                 }
                 catch (ApplicationException appExp)
@@ -285,7 +290,7 @@ namespace ActivationService
             NeeoUtility.SetServiceResponseHeaders(CustomHttpStatusCode.InvalidArguments);
             return codeSendingResult;
         }
-     
+
         /// <summary>
         /// Sends activation code to the phone number provided in <paramref name="ph"/>. It is a wrapping method with short parameter name.
         /// </summary>
@@ -333,6 +338,10 @@ namespace ActivationService
             CodeSendingService codeSendingService = (CodeSendingService)sType;
             uint tempActivationCode = 0;
             ulong tempPhoneNumber = 0;
+            string restrictSpecifiedAeasSMS = ConfigurationManager.AppSettings[NeeoConstants.RestrictSpecifiedAeasSMS];
+            string registerationRequestCheckEnable = ConfigurationManager.AppSettings[NeeoConstants.EnableRegisterationRequestCheck];
+            
+
             if (!NeeoUtility.IsNullOrEmpty(ph) && !NeeoUtility.IsNullOrEmpty(actCode) && Enum.IsDefined(typeof(DevicePlatform), dP) && Enum.IsDefined(typeof(CodeSendingService), sType) && uint.TryParse(actCode, out tempActivationCode) && ulong.TryParse(ph, out tempPhoneNumber))
             {
                 SMSLog currentSms = new SMSLog();
@@ -368,7 +377,8 @@ namespace ActivationService
                     else
                     {
 
-                        //if (NeeoActivation.CheckUserAlreadyRegistered(ph))
+                        // NeeoActivation.CheckUserAlreadyRegistered(ph)
+                        if (registerationRequestCheckEnable == "0" || NeeoActivation.CheckUserRegisterationRequest(ph))
                         {
                             /*
                             if (ph.StartsWith("994") || ph.StartsWith("33"))
@@ -384,38 +394,53 @@ namespace ActivationService
                             }
                             else
                             {*/
-                                if (isDebugged == false)
+                            if (isDebugged == false)
+                            {
+                                if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] != "enabled")
                                 {
-                                    if (ConfigurationManager.AppSettings[NeeoConstants.AWSStatus] != "enabled")
+                                    if (restrictSpecifiedAeasSMS == "1" && (ph.StartsWith("994") || ph.StartsWith("33")))
+                                    {
+                                        if (currentSms.isDebugged == true)
+                                        {
+                                            currentSms.status = "Debugged";
+                                        }
+                                        else
+                                        {
+                                            currentSms.status = "FRAZ";
+                                        }
+                                    }
+                                    else
                                     {
                                         codeSendingResult = NeeoActivation.SendActivationCode(ph, userDevicePlatform, actCode, appKey, false);
                                         currentSms.status = codeSendingResult.ToString();
                                     }
-                                else
-                                    {
-                                        string vendorMessageId = "";
-                                        string status = "";
-                                        SmsManager.SendThroughAmazon(ph, currentSms.messageBody, isRes, 1, false, out vendorMessageId, out status);
-                                        if (vendorMessageId.Length > 5 && status.Length > 0)
-                                        {
-                                            currentSms.vendorMessageId = vendorMessageId;
-                                            currentSms.status = status;
-                                        }
-                                        codeSendingResult = 1;
-                                    }
                                 }
                                 else
                                 {
-                                    currentSms.status = "Debugged";
+                                    string vendorMessageId = "";
+                                    string status = "";
+                                    SmsManager.SendThroughAmazon(ph, currentSms.messageBody, isRes, 1, false, out vendorMessageId, out status);
+                                    if (vendorMessageId.Length > 5 && status.Length > 0)
+                                    {
+                                        currentSms.vendorMessageId = vendorMessageId;
+                                        currentSms.status = status;
+                                    }
                                     codeSendingResult = 1;
-
                                 }
-                           // }
+                            }
+                            else
+                            {
+                                currentSms.status = "Debugged";
+                                codeSendingResult = 1;
+
+                            }
+                            // }
                         }
-                        //else {
-                        //    currentSms.status = "UnRegisteredUser";
-                        //    codeSendingResult = -1;
-                        //}
+                        else
+                        {
+                            currentSms.status = "UnRegisteredUser";
+                            codeSendingResult = -1;
+                        }
                     }
                 }
                 catch (ApplicationException appExp)
@@ -424,9 +449,7 @@ namespace ActivationService
                 }
                 finally
                 {
-
-                   SmsManager.InsertActivationSMSLog(currentSms.vendorMessageId, currentSms.receiver, currentSms.messageBody, currentSms.isResend, currentSms.isRegenerate, currentSms.messageType, currentSms.appKey, currentSms.status, currentSms.deviceInfo, currentSms.isDebugged);
-
+                    SmsManager.InsertActivationSMSLog(currentSms.vendorMessageId, currentSms.receiver, currentSms.messageBody, currentSms.isResend, currentSms.isRegenerate, currentSms.messageType, currentSms.appKey, currentSms.status, currentSms.deviceInfo, currentSms.isDebugged);
                 }
                 return codeSendingResult;
             }
@@ -907,6 +930,18 @@ namespace ActivationService
                 return AppCompatibility.Incompatible;
             }
             return AppCompatibility.Incompatible;
+        }
+
+        /// <summary>
+        /// Insert a log record for user registeration request
+        /// </summary>
+        /// <param name="username">A string containing the user id.</param>
+        /// <param name="latitude">A float contain latitude value.</param>
+        /// <param name="longitude">A float contain longitude value.</param>
+        /// <returns>Returns true on successful insertion.</returns>
+        public bool InsertUserRegisterationRequestsLog(string username, float latitude, float longitude)
+        {
+            return NeeoActivation.InsertMembersRequestsLog(username, latitude, longitude);
         }
 
         #endregion

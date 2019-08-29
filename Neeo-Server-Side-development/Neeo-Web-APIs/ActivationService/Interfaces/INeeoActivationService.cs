@@ -153,6 +153,18 @@ namespace ActivationService
         [WebInvoke(UriTemplate = "/VerifyUser", Method = "POST", RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool VerifyUser(string uID, string hash);
+
+        /// <summary>
+        /// Insert a log record for user registeration request
+        /// </summary>
+        /// <param name="username">A string containing the user id.</param>
+        /// <param name="latitude">A float contain latitude value.</param>
+        /// <param name="longitude">A float contain longitude value.</param>
+        /// <returns>Returns true on successful insertion.</returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/InsertUserRegisterationRequestsLog", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        //[TransactionFlow(TransactionFlowOption.Allowed)]
+        bool InsertUserRegisterationRequestsLog(string username, float latitude, float longitude);
     }
 
 }

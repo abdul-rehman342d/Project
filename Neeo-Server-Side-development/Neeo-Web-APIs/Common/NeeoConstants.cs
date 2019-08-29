@@ -300,5 +300,18 @@ namespace Common
         /// Key for the usage of Amazon sms service.
         /// </summary>
         public const string AWSStatus = "AWSStatus";
+
+        /// <summary>
+        /// Enable restriction to work for specified country codes.
+        /// </summary>
+        public const string RestrictSpecifiedAeasSMS = "RestrictSpecifiedAeasSMS";
+
+        /// <summary>
+        /// Enable registration request check before sending the activation sms.
+        /// </summary>
+        public const string EnableRegisterationRequestCheck = "EnableRegisterationRequestCheck";
+
+        
+
     }
 }

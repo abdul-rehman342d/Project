@@ -37,7 +37,8 @@ namespace DAL
         #endregion
 
         #region Stored Procedures
-
+        private const string ProcInsertMembersRequestsLog = "spne_InsertMembersRequestsLog";
+        private const string ProcDoesMembersRequestsExist = "spne_IsMembersRequestsExist";
         private const string ProcCheckUserExistanceByPhoneNumber = "spne_CheckUserExistanceByPhoneNumber";
         private const string ProcDeleteUserBlockedStateByPhoneNumber = "spne_DeleteUserBlockedStateByPhoneNumber";
         private const string ProcGetContactsExistanceAndRosterStatusByContactsList = "spne_GetContactsExistanceAndRosterStatusByContactsList";
@@ -80,7 +81,7 @@ namespace DAL
 
 
         private const string ProcNearByUsersByLocation = "spne_GetNearByUsersByLocation";
-        
+
 
         //NearByMePromotionPackages
         private const string ProcInsertNearByMePromotionPackage = "spne_CreatePromotionPackage";
@@ -95,7 +96,7 @@ namespace DAL
         //Country
         private const string ProcGetAllCountries = "spne_GetAllCountries";
         private const string ProcGetCountryByCode = "spne_GetCountryByCode";
-     
+
         //NearByMePromotion
         private const string ProcInsertNearByMePromotion = "spne_CreatePromotion";
         private const string ProcInsertNearByMePromotionImage = "spne_";
@@ -118,7 +119,7 @@ namespace DAL
         private const string ProcInsertActivationSMSLog = "spne_InsertActivationSMSLog";
 
 
-        
+
         #endregion
 
         #region Constructors
@@ -399,6 +400,82 @@ namespace DAL
                     {
                         _con.Close();
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks whether user's registeration request exists or not. 
+        /// </summary>
+        /// <param name="phoneNumber">A string containing user's phone number.</param>
+        /// <returns>true if user request exists otherwise false.</returns>
+        public bool CheckUserRegisterationRequest(string phoneNumber)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = ProcDoesMembersRequestsExist;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = _con;
+            cmd.Parameters.Add("@username", SqlDbType.NVarChar, 64).Value = phoneNumber;
+
+            try
+            {
+                _con.Open();
+                bool status = (bool)cmd.ExecuteScalar();
+                return status;
+            }
+            catch (SqlException sqlEx)
+            {
+                LogManager.CurrentInstance.ErrorLogger.LogError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, sqlEx.Message, sqlEx);
+                throw new ApplicationException(CustomHttpStatusCode.DatabaseOperationFailure.ToString("D"));
+            }
+            finally
+            {
+                if (_con.State != ConnectionState.Closed)
+                {
+                    _con.Close();
+                }
+            }
+        }
+
+
+
+        /// <summary>
+        /// Insert a log record for user registeration request
+        /// </summary>
+        /// <param name="username">A string containing the user id.</param>
+        /// <param name="latitude">A float contain latitude value.</param>
+        /// <param name="longitude">A float contain longitude value.</param>
+        /// <returns>Returns true on successful insertion.</returns>
+        public bool InsertMembersRequestsLog(string username, float latitude, float longitude)
+        {
+            int count = 0;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = ProcInsertMembersRequestsLog;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = _con;
+            cmd.Parameters.Add("@username", SqlDbType.NVarChar).Value = username;
+            cmd.Parameters.Add("@latitude", SqlDbType.Float).Value = latitude;
+            cmd.Parameters.Add("@longitude", SqlDbType.Float).Value = longitude;
+
+            try
+            {
+                _con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException sqlEx)
+            {
+                LogManager.CurrentInstance.ErrorLogger.LogError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, sqlEx.Message, sqlEx);
+                if (sqlEx.Number == NeeoConstants.DbInvalidUserCode)
+                    throw new ApplicationException(CustomHttpStatusCode.InvalidUser.ToString("D"));
+                else
+                    throw new ApplicationException(CustomHttpStatusCode.DatabaseOperationFailure.ToString("D"));
+            }
+            finally
+            {
+                if (_con.State != ConnectionState.Closed)
+                {
+                    _con.Close();
                 }
             }
         }
@@ -1812,7 +1889,7 @@ namespace DAL
                 }
             }
         }
-        public async Task<bool> InsertNearByMePromotion(string username, string description,Byte status,Byte audienceMaxAge,Byte audienceMinAge,string locations,Byte audienceGender, string audienceInterests,string ImagesXml,string PromotionPackagesXml)
+        public async Task<bool> InsertNearByMePromotion(string username, string description, Byte status, Byte audienceMaxAge, Byte audienceMinAge, string locations, Byte audienceGender, string audienceInterests, string ImagesXml, string PromotionPackagesXml)
         {
             int count = 0;
             SqlCommand cmd = new SqlCommand();
@@ -1822,10 +1899,10 @@ namespace DAL
             cmd.Parameters.Add("@username", SqlDbType.NVarChar, 64).Value = username;
             cmd.Parameters.Add("@description", SqlDbType.NVarChar, 1000).Value = description;
             cmd.Parameters.Add("@status", SqlDbType.TinyInt).Value = status;
-            cmd.Parameters.Add("@audienceMaxAge", SqlDbType.TinyInt).Value =audienceMaxAge;
+            cmd.Parameters.Add("@audienceMaxAge", SqlDbType.TinyInt).Value = audienceMaxAge;
             cmd.Parameters.Add("@audienceMinAge", SqlDbType.TinyInt).Value = audienceMinAge;
             cmd.Parameters.Add("@audienceGender", SqlDbType.TinyInt).Value = audienceGender;
-            cmd.Parameters.Add("@audienceInterests", SqlDbType.VarChar,500).Value = audienceInterests;
+            cmd.Parameters.Add("@audienceInterests", SqlDbType.VarChar, 500).Value = audienceInterests;
             cmd.Parameters.Add("@ImagesXml", SqlDbType.NVarChar).Value = ImagesXml;
             cmd.Parameters.Add("@PromotionPackagesXml", SqlDbType.Xml).Value = PromotionPackagesXml;
             try
@@ -1850,7 +1927,7 @@ namespace DAL
                 }
             }
         }
-        public async Task<bool> UpsertNearByMePromotion(int promotionId,string username, string description, Byte status, Byte audienceMaxAge, Byte audienceMinAge, string locations, Byte audienceGender, string audienceInterests, string ImagesXml, string PromotionPackagesXml)
+        public async Task<bool> UpsertNearByMePromotion(int promotionId, string username, string description, Byte status, Byte audienceMaxAge, Byte audienceMinAge, string locations, Byte audienceGender, string audienceInterests, string ImagesXml, string PromotionPackagesXml)
         {
             int count = 0;
             SqlCommand cmd = new SqlCommand();
@@ -1891,7 +1968,7 @@ namespace DAL
                 }
             }
         }
-        public async Task<bool> UpsertNearByMePromotionStatus(int promotionId,Byte status)
+        public async Task<bool> UpsertNearByMePromotionStatus(int promotionId, Byte status)
         {
             int count = 0;
             SqlCommand cmd = new SqlCommand();
@@ -1957,7 +2034,7 @@ namespace DAL
                 }
             }
         }
-        public async Task<DataTable> GetPersonalNearByMePromotionByUserName(string username,string advertiser)
+        public async Task<DataTable> GetPersonalNearByMePromotionByUserName(string username, string advertiser)
         {
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = ProcGetPersonalNearByMePromotionByUserName;
@@ -2020,7 +2097,7 @@ namespace DAL
                 }
             }
         }
-        public async Task<DataTable> GetTopNearByMePromotionByUserName(string username,int top,string advertiser)
+        public async Task<DataTable> GetTopNearByMePromotionByUserName(string username, int top, string advertiser)
         {
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = ProcGetTopNearByMePromotionByUserName;
@@ -2153,7 +2230,7 @@ namespace DAL
         #endregion
 
         #region Near By Me Promotion Package
-        public async Task<bool> InsertNearByMePromotionPackage(int locationId, string description,decimal price, Boolean enabled)
+        public async Task<bool> InsertNearByMePromotionPackage(int locationId, string description, decimal price, Boolean enabled)
         {
             int count = 0;
             SqlCommand cmd = new SqlCommand();
@@ -2187,7 +2264,7 @@ namespace DAL
                 }
             }
         }
-        public async Task<bool> UpsertNearByMePromotionPackage(int locationId, string description, decimal price, Boolean enabled,int packageId)
+        public async Task<bool> UpsertNearByMePromotionPackage(int locationId, string description, decimal price, Boolean enabled, int packageId)
         {
             int count = 0;
             SqlCommand cmd = new SqlCommand();
@@ -2294,7 +2371,7 @@ namespace DAL
 
             try
             {
-                await System.Threading.Tasks.Task.Run(() =>  adapter.Fill(dtNearByMePromotion));
+                await System.Threading.Tasks.Task.Run(() => adapter.Fill(dtNearByMePromotion));
                 return dtNearByMePromotion;
             }
             catch (SqlException sqlEx)
@@ -2327,7 +2404,7 @@ namespace DAL
 
             try
             {
-                await System.Threading.Tasks.Task.Run(() =>  adapter.Fill(dtNearByMePromotion));
+                await System.Threading.Tasks.Task.Run(() => adapter.Fill(dtNearByMePromotion));
                 return dtNearByMePromotion;
             }
             catch (SqlException sqlEx)
@@ -2352,7 +2429,7 @@ namespace DAL
             cmd.CommandText = ProcGetCountryByCode;
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = _con;
-            cmd.Parameters.Add("@countryCode", SqlDbType.VarChar,3).Value = countryCode;
+            cmd.Parameters.Add("@countryCode", SqlDbType.VarChar, 3).Value = countryCode;
 
             DataTable dtCountry = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -2378,18 +2455,18 @@ namespace DAL
                 }
             }
         }
-        
+
         #endregion
 
         #region PersonalData
 
-        public async Task<bool> UpdateUserPersonalData(string username,DateTime dateOfBirth, string interest, byte gender,int country)
+        public async Task<bool> UpdateUserPersonalData(string username, DateTime dateOfBirth, string interest, byte gender, int country)
         {
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = ProUpdateUserPersonalData;
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = _con;
-            cmd.Parameters.Add("@username", SqlDbType.VarChar,30).Value = username;
+            cmd.Parameters.Add("@username", SqlDbType.VarChar, 30).Value = username;
             cmd.Parameters.Add("@dateOfBirth", SqlDbType.DateTime).Value = dateOfBirth;
             cmd.Parameters.Add("@interest", SqlDbType.VarChar).Value = interest;
             cmd.Parameters.Add("@gender", SqlDbType.TinyInt).Value = gender;
@@ -2470,7 +2547,7 @@ namespace DAL
 
         #region User ChatBackUp
 
-     
+
         public async Task<bool> CreateXMLChatBackup(string sender, string messagesXml)
         {
             SqlCommand cmd = new SqlCommand();
@@ -2509,9 +2586,9 @@ namespace DAL
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = _con;
             cmd.Parameters.Add("@sender", SqlDbType.NVarChar, 64).Value = sender;
-         
 
-            
+
+
             DataTable dbGetChatBackup = new DataTable();
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
 
@@ -2541,7 +2618,7 @@ namespace DAL
         #endregion
 
         #region Amazon
-        public bool InsertSMSLog(string vendorMessageId,string receiver,string messageBody,bool isResend,bool isRegenerated,short messageType, string appKey,string status)
+        public bool InsertSMSLog(string vendorMessageId, string receiver, string messageBody, bool isResend, bool isRegenerated, short messageType, string appKey, string status)
         {
             int count = 0;
             SqlCommand cmd = new SqlCommand();
@@ -2582,7 +2659,7 @@ namespace DAL
 
             }
         }
-        public bool InsertActivationSMSLog(string vendorMessageId, string receiver, string messageBody, bool isResend, bool isRegenerated, short messageType, string appKey, string status,string deviceInfo, bool isDebugged)
+        public bool InsertActivationSMSLog(string vendorMessageId, string receiver, string messageBody, bool isResend, bool isRegenerated, short messageType, string appKey, string status, string deviceInfo, bool isDebugged)
         {
             int count = 0;
             SqlCommand cmd = new SqlCommand();
