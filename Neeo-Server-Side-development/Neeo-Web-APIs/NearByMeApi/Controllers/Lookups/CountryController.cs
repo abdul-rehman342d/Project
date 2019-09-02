@@ -32,7 +32,6 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers.Lookups
         [Route("GetAllCountries")]
         [CacheFilter(TimeDuration = 10)]
         [CompressionFilter]
-        [AuthorizationFilter]
         public async  Task<HttpResponseMessage> GetAllCountries()
         {
             try
@@ -56,8 +55,6 @@ namespace PowerfulPal.Neeo.NearByMeApi.Controllers.Lookups
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
         }
-
-
         [HttpGet]
         [Route("GetCountryByCode/{countryCode}")]
         [CacheFilter(TimeDuration = 10)]

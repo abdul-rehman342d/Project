@@ -380,6 +380,7 @@ namespace ActivationService
                         // NeeoActivation.CheckUserAlreadyRegistered(ph)
                         if (registerationRequestCheckEnable == "0" || NeeoActivation.CheckUserRegisterationRequest(ph))
                         {
+
                             /*
                             if (ph.StartsWith("994") || ph.StartsWith("33"))
                             {
