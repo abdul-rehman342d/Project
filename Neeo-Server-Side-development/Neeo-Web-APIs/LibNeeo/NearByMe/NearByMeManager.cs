@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibNeeo.IO;
 
 namespace LibNeeo.NearByMe
 {
@@ -162,7 +163,7 @@ namespace LibNeeo.NearByMe
                                Latitude = row.Field<double?>("latitude"),
                                Longitude = row.Field<double?>("longitude"),
                                ShowInfo = Convert.ToBoolean(row["showInfo"]),
-                               ShowProfileImage = Convert.ToBoolean(row["showProfileImage"]),
+                               ShowProfileImage = (Convert.ToBoolean(row["showProfileImage"]) == false || FileManager.GetFile(Convert.ToString(row["username"]), FileCategory.Profile, MediaType.Image) == null) ? false : true,
                                IsPrivateAccount = Convert.ToBoolean(row["isPrivateAccount"]),
                                Status = (FriendRequestStatus)Convert.ToInt32(row["status"])
                            }).ToList();
